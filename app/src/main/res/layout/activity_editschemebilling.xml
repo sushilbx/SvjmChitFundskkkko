@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".PrintbillingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="10dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/arrowback">
+
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:text="Print Billing"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1.8"
+                android:backgroundTint="@color/white"
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:padding="10dp"
+                    android:hint="Please Select Customer Bill No"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black
+"
+                    android:background="@color/white"
+                    android:ems="10" />
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1.6"
+                android:backgroundTint="@color/white"
+                >
+
+                <TextView
+                    android:id="@+id/edtname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginStart="10dp"
+                    android:text="Name :"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    >
+
+                </TextView>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:weightSum="2"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/white"
+                android:layout_weight="1.6"
+                >
+
+                <TextView
+                    android:id="@+id/edtmobileno"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:text="Mobile No. :"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    >
+
+                </TextView>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:layout_weight="1.6"
+            >
+
+            <TextView
+                android:id="@+id/edtplase"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_marginStart="10dp"
+                android:text="Place :"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                >
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1.6"
+            android:backgroundTint="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/edtprvoius"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:text="Previous  :"
+                android:textColor="@color/black">
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1.6"
+            android:backgroundTint="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/edtbillno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:text="Bill No. :"
+                android:textColor="@color/black"                >
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1.6"
+            android:visibility="gone"
+            android:backgroundTint="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/edtamount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:text="Amount :"
+                android:textColor="@color/black">
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:layout_weight="1.6"
+            >
+
+            <TextView
+                android:id="@+id/edttotal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:text="Total :"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                >
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/l2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:background="#CFD8DC"
+
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000000"
+                android:paddingStart="5dp"
+                android:text="PRINTING DETAILS"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:paddingStart="10dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="5dp"
+                android:text="Printer Status:"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bpstatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:gravity="end"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Disconnected"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="50dp"
+            android:weightSum="2"
+           >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="1"
+
+
+                android:background="@color/colorAccent"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="34dp"
+                android:drawableStart="@drawable/ic_bluetooth_black_24dp"
+
+                android:text="@string/connect"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/mPrint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_print_black_24dp"
+
+                android:enabled="false"
+                android:background="@color/colorAccent"
+
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="34dp"
+                android:paddingBottom="3dp"
+                android:text="@string/print"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

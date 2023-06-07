@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".AddgroupActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="11dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/arrowback">
+
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:text="Add New Group"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+
+
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:text="Enter Group Name:"
+    android:layout_marginStart="15dp"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    >
+
+</TextView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1.6"
+            >
+
+            <EditText
+                android:id="@+id/groupname"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+
+                android:textColorHint="@color/black"
+                android:textColor="#575757"
+                >
+
+            </EditText>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Enter Installment Amount:"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            >
+
+        </TextView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1.6"
+            >
+
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="number"
+                android:background="@color/white"
+                android:textColorHint="@color/black"
+                android:textColor="#575757"
+                >
+
+            </EditText>
+        </androidx.cardview.widget.CardView>
+
+
+        <Button
+            android:id="@+id/btnadd"
+            android:layout_width="255dp"
+            android:layout_gravity="center"
+            android:backgroundTint="#393185"
+            android:text="Confirm / Continue"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:layout_below="@+id/text3"
+            android:layout_height="50dp">
+
+        </Button>
+
+
+
+
+
+</LinearLayout>
+
+</LinearLayout>

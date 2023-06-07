@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SvjmChitFund</string>
+    <string-array name="Amount">
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+    </string-array>
+    <string name="example_autocompletetextview">Example showing AutoCompleteTextView
+        </string>
+    <string name="connect">Connect</string>
+    <string name="print">Print</string>
+    <string name="bluetooth_devices">Bluetooth Devices</string>
+    <string name="error_mobile_invalid_india">Please enter valid 10 digit Mobile Number.</string>
+</resources>

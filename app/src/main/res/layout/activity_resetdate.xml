@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ResetdateActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="10dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/arrowback">
+
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:text="Reset Date"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:textColorHint="@color/black"
+                android:hint="Enter Customer Id"
+
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:ems="10" />
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+
+            >
+
+            <TextView
+                android:id="@+id/textdate"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="ResetDate to:"
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+
+            </TextView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="210dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@+id/textdate"
+                android:backgroundTint="@color/white"
+
+                android:background="@drawable/edt_rect">
+
+
+                <EditText
+                    android:id="@+id/date"
+                    android:layout_width="210dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="60dp"
+                    android:background="@color/white"
+                    android:hint="Enter date yyyy-mm-dd"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black">
+
+                </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+
+
+            >
+
+            <TextView
+                android:id="@+id/textpassword"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="EnterPassword:"
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+
+            </TextView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="210dp"
+                android:layout_height="60dp"
+                android:layout_toEndOf="@+id/textpassword"
+                android:layout_marginStart="30dp"
+                android:backgroundTint="@color/white"
+
+                android:background="@drawable/edt_rect">
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="210dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:hint="Enter Password"
+                android:layout_toEndOf="@+id/textpassword"
+                android:textColorHint="@color/black">
+
+            </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnadd"
+            android:layout_width="255dp"
+            android:layout_gravity="center"
+            android:backgroundTint="#393185"
+            android:text="Approve"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:layout_height="50dp">
+
+        </Button>
+
+
+
+</LinearLayout>
+
+</LinearLayout>

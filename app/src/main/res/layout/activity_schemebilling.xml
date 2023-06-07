@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".SchemebillingActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="10dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/arrowback">
+
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Scheme Billing"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+
+</LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1.6"
+        android:backgroundTint="@color/white"
+
+        >
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColorHint="@color/black"
+
+            android:hint="Enter Customer Id"
+
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:ems="10" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1.6"
+        android:backgroundTint="@color/white"
+
+        >
+
+
+    <EditText
+        android:id="@+id/edtname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginStart="10dp"
+        android:textColorHint="@color/black"
+        android:hint="Name :"
+        android:textColor="#575757"
+        >
+
+    </EditText>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1.6"
+        android:backgroundTint="@color/white"
+
+        >
+
+
+    <EditText
+        android:id="@+id/edtmobileno"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:background="@color/white"
+        android:textColorHint="@color/black"
+        android:inputType="number"
+        android:hint="Mobile No. :"
+        android:textColor="#575757"
+        >
+
+    </EditText>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1.6"
+        android:backgroundTint="@color/white"
+
+        >
+
+        <EditText
+            android:id="@+id/edtpalse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:textColorHint="@color/black"
+            android:hint="Place :"
+            android:textColor="#575757"
+            >
+
+        </EditText>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1.6"
+        android:backgroundTint="@color/white"
+
+        >
+
+        <EditText
+            android:id="@+id/edtamount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginStart="10dp"
+            android:textColorHint="@color/black"
+            android:hint="Amount :"
+            android:textColor="#575757"
+            >
+
+        </EditText>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1.6"
+        android:backgroundTint="@color/white"
+        >
+
+        <EditText
+            android:id="@+id/edttotal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:textColorHint="@color/black"
+            android:hint="Total :"
+            android:layout_marginStart="10dp"
+            android:textColor="#575757"
+            >
+
+        </EditText>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1.6"
+        android:backgroundTint="@color/white"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+
+
+        <EditText
+            android:id="@+id/edtDateBilling"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginStart="10dp"
+            android:textColorHint="@color/black"
+            android:hint="Date :"
+            android:focusable="false"
+            android:clickable="true"
+            android:drawablePadding="10dp"
+            android:drawableEnd="@drawable/newcalender"
+            android:textColor="#575757"
+            >
+
+        </EditText>
+
+
+
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/printbtn"
+        android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#393185"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="Create Bill"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_height="40dp">
+
+    </Button>
+    <Button
+        android:id="@+id/cansel"
+        android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#393185"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text=" Preview Bill"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_height="40dp">
+
+    </Button>
+
+</LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:paddingStart="5dp"
+            android:text="PRINTING DETAILS"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="Printer Status:"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bpstatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Disconnected"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:weightSum="2"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Scan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
+
+
+            android:background="@color/colorAccent"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="34dp"
+            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
+
+            android:text="@string/connect"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mPrint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_print_black_24dp"
+
+            android:enabled="false"
+            android:background="@color/colorAccent"
+
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="34dp"
+            android:paddingBottom="3dp"
+            android:text="@string/print"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+

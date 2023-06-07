@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AddbulkActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="10dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/arrowback">
+
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:text="Add Bulk Customers"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="15dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="8dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/uploadimage"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="140dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/upload"
+
+                    >
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/uploadimage"
+                    android:text="Drag / Drop Files!! "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginStart="50dp"
+                    >
+
+                </TextView>
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/uploadimage"
+                    android:text=" Browse "
+                    android:textColor="#DC7E0F"
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@+id/text1"
+                    android:layout_marginStart="10dp"
+                    >
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text=" to upload files in doc, pfd, xls format, upto max 2.0 MB  "
+                    android:textColor="#DC7E0F"
+                    android:textSize="10sp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/filetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:text="abc.pdf"
+                    android:textColor="@color/black"
+                    android:textSize="10sp">
+
+                </TextView>
+
+
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+        <Button
+            android:id="@+id/Continue"
+            android:layout_width="255dp"
+            android:layout_gravity="center"
+            android:backgroundTint="#393185"
+            android:text="Continue"
+
+
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:layout_below="@+id/text3"
+            android:layout_height="50dp">
+
+        </Button>
+
+
+
+
+
+
+
+</LinearLayout>
+
+    </LinearLayout>
