@@ -58,6 +58,7 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/ivDaily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -81,7 +82,7 @@
 
 
                     <ImageView
-                        android:id="@+id/ivDaily"
+
                         android:layout_width="16dp"
                         android:layout_height="10dp"
                         android:layout_alignParentEnd="true"
@@ -334,6 +335,7 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/ivMonthly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -357,7 +359,7 @@
 
 
                     <ImageView
-                        android:id="@+id/ivMonthly"
+
                         android:layout_width="16dp"
                         android:layout_height="10dp"
                         android:layout_alignParentEnd="true"
@@ -580,7 +582,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-
+                    android:id="@+id/ivCustomer"
                     android:background="#F0F4FE"
                     >
 
@@ -600,7 +602,7 @@
 
 
                     <ImageView
-                        android:id="@+id/ivCustomer"
+
                         android:layout_width="16dp"
                         android:layout_height="10dp"
                         android:layout_alignParentEnd="true"
@@ -839,7 +841,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-
+                    android:id="@+id/ivyestrday"
                     android:background="#F0F4FE"
                     >
 
@@ -858,7 +860,7 @@
                     </TextView>
 
                     <ImageView
-                        android:id="@+id/ivyestrday"
+
                         android:layout_width="16dp"
                         android:layout_height="10dp"
                         android:layout_alignParentEnd="true"

@@ -44,8 +44,7 @@
                  android:layout_height="34dp"
                  android:layout_margin="10dp"
                  android:layout_weight="1.6"
-                 android:backgroundTint="@color/white"
-                 >
+                 android:backgroundTint="@color/white">
 
                  <TextView
                      android:id="@+id/customerdtname"
@@ -99,6 +98,28 @@
                      android:background="@color/white"
                      android:layout_marginStart="10dp"
                      android:text="Previous Balance:"
+                     android:gravity="center_vertical"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     >
+
+                 </TextView>
+             </androidx.cardview.widget.CardView>
+             <androidx.cardview.widget.CardView
+                 android:layout_width="match_parent"
+                 android:layout_height="34dp"
+                 android:layout_margin="10dp"
+                 android:layout_weight="1.6"
+                 android:backgroundTint="@color/white"
+                 >
+
+                 <TextView
+                     android:id="@+id/openBalance"
+                     android:layout_width="300dp"
+                     android:layout_height="match_parent"
+                     android:background="@color/white"
+                     android:layout_marginStart="10dp"
+                     android:text="Opening Balance:"
                      android:gravity="center_vertical"
                      android:textStyle="bold"
                      android:textColor="@color/black"

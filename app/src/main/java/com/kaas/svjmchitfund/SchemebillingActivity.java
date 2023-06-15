@@ -62,15 +62,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SchemebillingActivity extends Activity implements Runnable  {
-    final Calendar myCalendar= Calendar.getInstance();
+public class SchemebillingActivity extends Activity implements Runnable {
+    final Calendar myCalendar = Calendar.getInstance();
     private static final int PERMISSION_REQUEST_CODE = 200;
     protected static final String TAG = "EditschemebillingActivity";
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
     Button mScan, mPrint;
     TextView stat;
-    ImageView arrow,calender;
+    int openAmount;
+    ImageView arrow, calender;
     int printstat;
     /* Get time and date */
     Calendar c = Calendar.getInstance();
@@ -84,48 +85,47 @@ public class SchemebillingActivity extends Activity implements Runnable  {
     BluetoothDevice mBluetoothDevice;
 
 
-
-   String printpaidamt="";
+    String printpaidamt = "";
     byte FONT_TYPE;
     private static BluetoothSocket btsocket;
     private static OutputStream btoutputstream;
-    EditText edtDateBilling,edtname,edtmobileno,edtpalse,edtmonth,edtprvoius,edtbillno,edtamount,edttotal, shopname,gstno;
-Button cansel,printbtn;
-LinearLayout ll_1;
+    EditText edtDateBilling, edtname, edtmobileno, edtpalse, edtmonth, edtprvoius, edtbillno, edtamount, edttotal, shopname, gstno;
+    Button cansel, printbtn;
+    LinearLayout ll_1;
     DatePickerDialog.OnDateSetListener date;
-      String customers_id;
+    String customers_id;
 
     SessionManager sessionManager;
     SessionModel sessionModel;
     Context context;
-    ArrayAdapter<String> adapter ;
-    String[] arr = { "Paries,France", "PA,United States","Parana,Brazil",
+    ArrayAdapter<String> adapter;
+    String[] arr = {"Paries,France", "PA,United States", "Parana,Brazil",
             "Padua,Italy", "Pasadena,CA,United States"};
-    List<CoustmerindexModel.Customer> customers=new ArrayList<>();
-    ArrayList<String> customercode= new ArrayList<>();
-    String   Customercode="",name="",phone="",plase="",Month="",Prvoius="",Billno="",Amount="",Total="";
+    List<CoustmerindexModel.Customer> customers = new ArrayList<>();
+    ArrayList<String> customercode = new ArrayList<>();
+    String Customercode = "", name = "", phone = "", plase = "", Month = "", Prvoius = "", Billno = "", Amount = "", Total = "";
     AutoCompleteTextView autocomplete;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schemebilling);
         context = this;
-       // edtcustomercode = findViewById(R.id.edtcustomercode);
+        // edtcustomercode = findViewById(R.id.edtcustomercode);
         edtname = findViewById(R.id.edtname);
         arrow = findViewById(R.id.arrow);
         edtmobileno = findViewById(R.id.edtmobileno);
         ll_1 = findViewById(R.id.ll_1);
         edtpalse = findViewById(R.id.edtpalse);
-      //  edtmonth = findViewById(R.id.edtmonth);
-      //  edtprvoius = findViewById(R.id.edtprvoius);
-       // edtbillno = findViewById(R.id.edtbillno);
+        //  edtmonth = findViewById(R.id.edtmonth);
+        //  edtprvoius = findViewById(R.id.edtprvoius);
+        // edtbillno = findViewById(R.id.edtbillno);
         edtamount = findViewById(R.id.edtamount);
         edttotal = findViewById(R.id.edttotal);
         printbtn = findViewById(R.id.printbtn);
         cansel = findViewById(R.id.cansel);
         edtDateBilling = findViewById(R.id.edtDateBilling);
-
 
 
         stat = findViewById(R.id.bpstatus);
@@ -137,13 +137,12 @@ LinearLayout ll_1;
         sessionModel = new Gson().fromJson(sessionManager.getLoginSession(), SessionModel.class);
 
 
-
-           date =new DatePickerDialog.OnDateSetListener() {
+        date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH,month);
-                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
                 updateLabel();
             }
         };
@@ -156,14 +155,10 @@ LinearLayout ll_1;
         });
 
 
-
-
-
-
         ll_1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
 
-          finish();
+                finish();
 
 
             }
@@ -178,13 +173,6 @@ LinearLayout ll_1;
 
 
         });
-
-
-
-
-
-
-
 
 
         mPrint.setOnClickListener(new View.OnClickListener() {
@@ -329,47 +317,37 @@ LinearLayout ll_1;
         });
 
 
-
-
-
-
         autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id1) {
-                String value=adapter.getItem(position).toString();
+                String value = adapter.getItem(position).toString();
                 autocomplete.setText(value);
 
-                for (int i=0;i<customers.size();i++)
-                {
-                    if (value.equalsIgnoreCase(customers.get(i).customers_id))
-                    {
+                for (int i = 0; i < customers.size(); i++) {
+                    if (value.equalsIgnoreCase(customers.get(i).customers_id)) {
 
 
                         edtname.setText(Html.fromHtml(String.valueOf(customers.get(i).name)));
                         edtmobileno.setText(Html.fromHtml(String.valueOf(customers.get(i).mobile)));
                         edtpalse.setText(Html.fromHtml(String.valueOf(customers.get(i).place)));
-                      // edtmonth.setText(Html.fromHtml(String.valueOf(customers.get(i).month)));
-                       // edtbillno.setText(Html.fromHtml(String.valueOf(customers.get(i).customer_id)));
+                        // edtmonth.setText(Html.fromHtml(String.valueOf(customers.get(i).month)));
+                        // edtbillno.setText(Html.fromHtml(String.valueOf(customers.get(i).customer_id)));
                         edtamount.setText(Html.fromHtml(String.valueOf(customers.get(i).group.amount)));
-                        printpaidamt=customers.get(i).total_amount;
+                        printpaidamt = customers.get(i).total_amount;
 
-                        int x=Integer.parseInt(customers.get(i).group.amount);
-                        int y=Integer.parseInt(customers.get(i).total_amount);
+                        int x = Integer.parseInt(customers.get(i).group.amount);
+                        int y = Integer.parseInt(customers.get(i).total_amount);
 
                         //sum these two numbers
-                        int z=x+y;
+                        int z = x + y;
                         edttotal.setText(String.valueOf(z));
-                       // edtprvoius.setText(Html.fromHtml(String.valueOf(customers.get(i).installment)));
+                        // edtprvoius.setText(Html.fromHtml(String.valueOf(customers.get(i).installment)));
+                        openAmount = Integer.parseInt(customers.get(i).group.amount);
+
+                        //  Date.setText(Html.fromHtml(String.valueOf(customers.get(i).updated_at)));
 
 
-
-
-                      //  Date.setText(Html.fromHtml(String.valueOf(customers.get(i).updated_at)));
-
-
-
-
-                        customers_id= String.valueOf(customers.get(i).id);
+                        customers_id = String.valueOf(customers.get(i).id);
 
 
                     }
@@ -379,9 +357,8 @@ LinearLayout ll_1;
         });
 
 
-
-
     }
+
     private void indexCoustmer() {
         Log.e("sushiltoken", sessionModel.token);
         Call<CoustmerindexModel> call = RetrofitClient.getInstance().getApi().indexCoustmer(String.format("Bearer %s", sessionModel.token));
@@ -393,14 +370,13 @@ LinearLayout ll_1;
 
 
                     customers.clear();
-                    customers=(response.body().customer);
-                    for (int i=0;i<response.body().customer.size();i++)
-                    {
+                    customers = (response.body().customer);
+                    for (int i = 0; i < response.body().customer.size(); i++) {
                         customercode.add(response.body().customer.get(i).customers_id);
                     }
 
                     adapter = new ArrayAdapter<String>
-                            (context,android.R.layout.select_dialog_item, customercode);
+                            (context, android.R.layout.select_dialog_item, customercode);
 
                     autocomplete.setThreshold(2);
                     autocomplete.setAdapter(adapter);
@@ -411,7 +387,6 @@ LinearLayout ll_1;
                             return false;
                         }
                     });
-
 
 
                 }
@@ -425,9 +400,10 @@ LinearLayout ll_1;
             }
         });
     }
-    private void updateLabel(){
-        String myFormat="MM/dd/yy";
-        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
+
+    private void updateLabel() {
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
         edtDateBilling.setText(dateFormat.format(myCalendar.getTime()));
     }
 
@@ -481,23 +457,18 @@ LinearLayout ll_1;
                     ;
 
 
-                    time = formattedDate + "\n"+"--------------------------------\n\n\n";
-
-
-
-
+                    time = formattedDate + "\n" + "--------------------------------\n\n\n";
 
 
                     //   he = he + "********************************\n";
                     header5 = "Bill No. : ";
-                 //   billno = edtbillno.getText().toString() + "\n";
+                    //   billno = edtbillno.getText().toString() + "\n";
                     billno = billno;
 
 
                     header7 = "Account No. : ";
-                    accountno ="14337";
+                    accountno = "14337";
                     accountno = accountno;
-
 
 
                     header3 = "Name : ";
@@ -506,19 +477,16 @@ LinearLayout ll_1;
                     ;
 
 
-
                     header6 = "Oepn Balance : ";
                     previous = edtamount.getText().toString() + "\n";
                     previous = previous
                     ;
 
 
-
-                   header8 = "Paid Amount. : ";
+                    header8 = "Paid Amount. : ";
                     amount = printpaidamt + "\n";
                     amount = amount
-                          ;
-
+                    ;
 
 
                     header9 = "Grand Total. : ";
@@ -527,18 +495,12 @@ LinearLayout ll_1;
                     ;
 
 
-
-
-                  //  time = formattedDate + "\n"+"--------------------------------\n\n\n";
-
-
+                    //  time = formattedDate + "\n"+"--------------------------------\n\n\n";
 
 
                     os.write(blank.getBytes());
                     os.write(header1.getBytes());
                     os.write(Shopname.getBytes());
-
-
 
 
                     os.write(header2.getBytes());
@@ -564,30 +526,6 @@ LinearLayout ll_1;
 
                     os.write(header9.getBytes());
                     os.write(total.getBytes());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     os.write(checktop_status.getBytes());
@@ -727,11 +665,13 @@ LinearLayout ll_1;
             return;
         }
     }
+
     private void requestpermission() {
 
-        requestPermissions(new String[]{BLUETOOTH_CONNECT,BLUETOOTH_SCAN}, PERMISSION_REQUEST_CODE);
+        requestPermissions(new String[]{BLUETOOTH_CONNECT, BLUETOOTH_SCAN}, PERMISSION_REQUEST_CODE);
 
     }
+
     private void closeSocket(BluetoothSocket nOpenSocket) {
         try {
             nOpenSocket.close();
@@ -770,20 +710,17 @@ LinearLayout ll_1;
     }
 
 
-
-
-
     private void billadd() {
 
         Call<BillModel> call = RetrofitClient.getInstance().getApi().
-                billing("Bearer " + sessionManager.gettokan(),customers_id,"SRI VENKATESHWARA JEWELLERYMARTKOLLEG","GST-AARPV6283B1Z2","14337");
+                billing("Bearer " + sessionManager.gettokan(), customers_id, "SRI VENKATESHWARA JEWELLERYMARTKOLLEG", "GST-AARPV6283B1Z2", "14337");
         call.enqueue(new Callback<BillModel>() {
             @Override
             public void onResponse(Call<BillModel> call, Response<BillModel> response) {
 
                 Log.e("sushiltest", new Gson().toJson(response.body()));
                 if (response.isSuccessful()) {
-                    Toast.makeText(context,response.body().message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, response.body().message, Toast.LENGTH_SHORT).show();
 
                     //      amount.setText(response.body().group.amount);
                     //   groupname.setText(Html.fromHtml(response.body().group().get(0).name()));
@@ -799,7 +736,7 @@ LinearLayout ll_1;
         });
     }
 
-   private void showruledialog() {
+    private void showruledialog() {
 
         Dialog contacts_dialog = new Dialog(SchemebillingActivity.this, R.style.theme_sms_receive_dialog);
         contacts_dialog.setContentView(R.layout.privewbill);
@@ -813,13 +750,14 @@ LinearLayout ll_1;
         final TextView customercode = contacts_dialog.findViewById(R.id.customercodepreview);
         final TextView previousbalance = contacts_dialog.findViewById(R.id.previousbalance);
         final TextView closingbalance = contacts_dialog.findViewById(R.id.closingbalance);
-      //  final TextView insallmentno = contacts_dialog.findViewById(R.id.insallmentno);
+        final TextView openBalance = contacts_dialog.findViewById(R.id.openBalance);
 
-       customerdtname.setText("Customer Name :"+ " "+edtname.getText().toString());
-       customercode.setText("Customer Code :"+ " "+customers_id);
-       previousbalance.setText("Customer Mobile No :"+ " "+edtmobileno.getText().toString());
-       closingbalance.setText("Total Amount :"+ " "+edttotal.getText().toString());
-     //  insallmentno.setText("Installment No :"+ " "+edtmonth.getText().toString());
+        customerdtname.setText("Customer Name :" + " " + edtname.getText().toString());
+        customercode.setText("Customer Code :" + " " + customers_id);
+        previousbalance.setText("Customer Mobile No :" + " " + edtmobileno.getText().toString());
+        closingbalance.setText("Total Amount :" + " " + edttotal.getText().toString());
+        openBalance.setText("Opening Amount :" + " " + openAmount);
+        //  insallmentno.setText("Installment No :"+ " "+edtmonth.getText().toString());
 
 
         continuebutton.setOnClickListener(new View.OnClickListener() {
@@ -833,13 +771,13 @@ LinearLayout ll_1;
 
 
     }
-   private void showrdialogpassword() {
+
+    private void showrdialogpassword() {
 
         Dialog contacts_dialog = new Dialog(SchemebillingActivity.this, R.style.theme_sms_receive_dialog);
         contacts_dialog.setContentView(R.layout.password);
         contacts_dialog.setCancelable(true);
         contacts_dialog.setCanceledOnTouchOutside(true);
-
 
 
         contacts_dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -848,25 +786,16 @@ LinearLayout ll_1;
         final EditText edtpass = contacts_dialog.findViewById(R.id.edtpass);
 
 
-
-
-
-
         continuebutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
 
-                if (edtpass.getText().toString().isEmpty())
-                {
-                    Toast.makeText(context,"Please Enter password",Toast.LENGTH_SHORT).show();
-                }
-                else if (!edtpass.getText().toString().equalsIgnoreCase(sessionManager.getPasswordID()))
-                {
-                    Toast.makeText(context,"Please Enter Correct password",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    new DatePickerDialog(SchemebillingActivity.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                if (edtpass.getText().toString().isEmpty()) {
+                    Toast.makeText(context, "Please Enter password", Toast.LENGTH_SHORT).show();
+                } else if (!edtpass.getText().toString().equalsIgnoreCase(sessionManager.getPasswordID())) {
+                    Toast.makeText(context, "Please Enter Correct password", Toast.LENGTH_SHORT).show();
+                } else {
+                    new DatePickerDialog(SchemebillingActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                     contacts_dialog.dismiss();
                     hideKeyboard(SchemebillingActivity.this
                     );
@@ -890,13 +819,13 @@ LinearLayout ll_1;
 
     boolean checkForm() {
         Amount = edtamount.getText().toString().trim();
-      //  Customercode = edtcustomercode.getText().toString().trim();
+        //  Customercode = edtcustomercode.getText().toString().trim();
         phone = edtmobileno.getText().toString().trim();
         name = edtname.getText().toString().trim();
         plase = edtpalse.getText().toString().trim();
-     //   Month = edtmonth.getText().toString().trim();
-      //  Prvoius = edtprvoius.getText().toString().trim();
-      //  Billno = edtbillno.getText().toString().trim();
+        //   Month = edtmonth.getText().toString().trim();
+        //  Prvoius = edtprvoius.getText().toString().trim();
+        //  Billno = edtbillno.getText().toString().trim();
         Total = edttotal.getText().toString().trim();
 
         if (edtname.getText().toString().isEmpty()) {
@@ -907,7 +836,7 @@ LinearLayout ll_1;
 
 
         if (edtamount.getText().toString().isEmpty()) {
-           Toast.makeText(this, "Enter Amount", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter Amount", Toast.LENGTH_SHORT).show();
             edtamount.setError("Amount is required");
             return false;
         }
@@ -916,12 +845,11 @@ LinearLayout ll_1;
         if (edtmobileno.getText().toString().isEmpty()) {
             Toast.makeText(this, "Enter Customer mobileno", Toast.LENGTH_SHORT).show();
             edtmobileno.setError("Customer mobile is required");
-           return false;
+            return false;
         }
 
-        if(!Constant.isIndianNumberValid(phone))
-        {
-          //  Toast.makeText(this, getString(R.string.error_mobile_invalid_india), Toast.LENGTH_SHORT).show();
+        if (!Constant.isIndianNumberValid(phone)) {
+            //  Toast.makeText(this, getString(R.string.error_mobile_invalid_india), Toast.LENGTH_SHORT).show();
             edtmobileno.setError(getString(R.string.error_mobile_invalid_india));
             //  cancel = true;
             return false;
@@ -933,7 +861,6 @@ LinearLayout ll_1;
             edtpalse.setError("Customer place is required");
             return false;
         }
-
 
 
         return true;

@@ -33,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,7 +103,7 @@ public class ReportActivity extends Activity implements Runnable {
     EditText name;
     TextView month, amount, total, etmonth, code, billno;
     int id;
-    ImageView ivDaily, ivMonthly, ivCustomer, ivyestrday;
+    RelativeLayout ivDaily, ivMonthly, ivCustomer, ivyestrday;
     LinearLayout llDaily, llMonthly, llcustomer, llyestrday;
     Context context;
     ArrayList<String> customercode = new ArrayList<>();
@@ -208,11 +209,11 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llMonthly.getVisibility() == View.VISIBLE) {
                     llMonthly.setVisibility(View.GONE);
-                    ivMonthly.setImageResource(R.mipmap.arrowup);
+                   // ivMonthly.setImageResource(R.mipmap.arrowup);
                 } else {
                     llMonthly.setVisibility(View.VISIBLE);
                 }
-                ivMonthly.setImageResource(R.mipmap.arrowdown);
+             //   ivMonthly.setImageResource(R.mipmap.arrowdown);
 
 
             }
@@ -224,10 +225,10 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llDaily.getVisibility() == View.VISIBLE) {
                     llDaily.setVisibility(View.GONE);
-                    ivDaily.setImageResource(R.mipmap.arrowup);
+                   // ivDaily.setImageResource(R.mipmap.arrowup);
                 } else {
                     llDaily.setVisibility(View.VISIBLE);
-                    ivDaily.setImageResource(R.mipmap.arrowdown);
+                  //  ivDaily.setImageResource(R.mipmap.arrowdown);
                 }
 
 
@@ -240,11 +241,11 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llcustomer.getVisibility() == View.VISIBLE) {
                     llcustomer.setVisibility(View.GONE);
-                    ivCustomer.setImageResource(R.mipmap.arrowup);
+                   // ivCustomer.setImageResource(R.mipmap.arrowup);
                 } else {
                     llcustomer.setVisibility(View.VISIBLE);
                 }
-                ivCustomer.setImageResource(R.mipmap.arrowdown);
+               // ivCustomer.setImageResource(R.mipmap.arrowdown);
 
 
             }
@@ -256,11 +257,11 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llyestrday.getVisibility() == View.VISIBLE) {
                     llyestrday.setVisibility(View.GONE);
-                    ivyestrday.setImageResource(R.mipmap.arrowup);
+                   // ivyestrday.setImageResource(R.mipmap.arrowup);
                 } else {
                     llyestrday.setVisibility(View.VISIBLE);
                 }
-                ivyestrday.setImageResource(R.mipmap.arrowdown);
+              //  ivyestrday.setImageResource(R.mipmap.arrowdown);
 
 
             }
@@ -1584,24 +1585,6 @@ public class ReportActivity extends Activity implements Runnable {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void indexCoustmer() {
        // Log.e("sushiltoken", sessionModel.token);
