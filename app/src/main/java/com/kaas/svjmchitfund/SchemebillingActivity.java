@@ -70,6 +70,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
     private static final int REQUEST_ENABLE_BT = 2;
     Button mScan, mPrint;
     TextView stat;
+    EditText openingAmount;
     int openAmount;
     ImageView arrow, calender;
     int printstat;
@@ -90,7 +91,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
     private static BluetoothSocket btsocket;
     private static OutputStream btoutputstream;
     EditText edtDateBilling, edtname, edtmobileno, edtpalse, edtmonth, edtprvoius, edtbillno, edtamount, edttotal, shopname, gstno;
-    Button cansel, printbtn;
+    Button cansel;
     LinearLayout ll_1;
     DatePickerDialog.OnDateSetListener date;
     String customers_id;
@@ -117,20 +118,20 @@ public class SchemebillingActivity extends Activity implements Runnable {
         arrow = findViewById(R.id.arrow);
         edtmobileno = findViewById(R.id.edtmobileno);
         ll_1 = findViewById(R.id.ll_1);
+        openingAmount = findViewById(R.id.openingAmount);
         edtpalse = findViewById(R.id.edtpalse);
         //  edtmonth = findViewById(R.id.edtmonth);
         //  edtprvoius = findViewById(R.id.edtprvoius);
         // edtbillno = findViewById(R.id.edtbillno);
         edtamount = findViewById(R.id.edtamount);
         edttotal = findViewById(R.id.edttotal);
-        printbtn = findViewById(R.id.printbtn);
         cansel = findViewById(R.id.cansel);
         edtDateBilling = findViewById(R.id.edtDateBilling);
 
 
         stat = findViewById(R.id.bpstatus);
         mScan = findViewById(R.id.Scan);
-        mPrint = findViewById(R.id.mPrint);
+
         autocomplete = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
 
         sessionManager = new SessionManager(SchemebillingActivity.this);
@@ -175,14 +176,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
         });
 
 
-        mPrint.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View mView) {
 
-                p1();
-
-
-            }
-        });
 
         mScan = findViewById(R.id.Scan);
 
@@ -199,13 +193,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                             Intent enableBtIntent = new Intent(
                                     BluetoothAdapter.ACTION_REQUEST_ENABLE);
                             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                                // TODO: Consider calling
-                                //    ActivityCompat#requestPermissions
-                                // here to request the missing permissions, and then overriding
-                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                //                                          int[] grantResults)
-                                // to handle the case where the user grants the permission. See the documentation
-                                // for ActivityCompat#requestPermissions for more details.
+
                                 requestpermission();
                                 return;
                             }
@@ -214,13 +202,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                         } else {
 
                             if (ActivityCompat.checkSelfPermission(SchemebillingActivity.this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                                // TODO: Consider calling
-                                //    ActivityCompat#requestPermissions
-                                // here to request the missing permissions, and then overriding
-                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                //                                          int[] grantResults)
-                                // to handle the case where the user grants the permission. See the documentation
-                                // for ActivityCompat#requestPermissions for more details.
+
                                 requestpermission();
 
                                 return;
@@ -255,66 +237,9 @@ public class SchemebillingActivity extends Activity implements Runnable {
 
 
 
-
-
-
-
-/*
-        edtamount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                  @Override
-                  public void onFocusChange(View v, boolean hasFocus) {
-                      if (!hasFocus)
-                      {
-                          int y=0;
-                          int x=Integer.parseInt(edtprvoius.getText().toString());
-
-                          if (!edtamount.getText().toString().isEmpty())
-                          {
-                            y =Integer.parseInt(edtamount.getText().toString());
-                          }
-
-
-                          //sum these two numbers
-                          int z=x+y;
-                          edttotal.setText(String.valueOf(z));
-                      }
-                  }
-              });
-*/
-
-
-/*
-        edttotal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                {
-                    int x=Integer.parseInt(edtprvoius.getText().toString());
-                    int y=Integer.parseInt(edtamount.getText().toString());
-
-                    //sum these two numbers
-                    int z=x+y;
-                    edttotal.setText(String.valueOf(z));
-                }
-            }
-        });
-*/
-
         indexCoustmer();
 
-        printbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkForm()) {
 
-                    billadd();
-
-
-                }
-            }
-
-
-        });
 
 
         autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -334,7 +259,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                         // edtbillno.setText(Html.fromHtml(String.valueOf(customers.get(i).customer_id)));
                         edtamount.setText(Html.fromHtml(String.valueOf(customers.get(i).group.amount)));
                         printpaidamt = customers.get(i).total_amount;
-
+                        openingAmount.setText("Opening balance :  "+customers.get(i).group.amount); // jitna jma hua wo balance show hona hai
                         int x = Integer.parseInt(customers.get(i).group.amount);
                         int y = Integer.parseInt(customers.get(i).total_amount);
 
@@ -745,7 +670,9 @@ public class SchemebillingActivity extends Activity implements Runnable {
 
         contacts_dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         contacts_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        final Button printBill = contacts_dialog.findViewById(R.id.printBill);
         final Button continuebutton = contacts_dialog.findViewById(R.id.continuedbtn);
+        final Button createBill = contacts_dialog.findViewById(R.id.createBill);
         final TextView customerdtname = contacts_dialog.findViewById(R.id.customerdtname);
         final TextView customercode = contacts_dialog.findViewById(R.id.customercodepreview);
         final TextView previousbalance = contacts_dialog.findViewById(R.id.previousbalance);
@@ -756,17 +683,37 @@ public class SchemebillingActivity extends Activity implements Runnable {
         customercode.setText("Customer Code :" + " " + customers_id);
         previousbalance.setText("Customer Mobile No :" + " " + edtmobileno.getText().toString());
         closingbalance.setText("Total Amount :" + " " + edttotal.getText().toString());
-        openBalance.setText("Opening Amount :" + " " + openAmount);
+        openBalance.setText("Opening Amount :" + " " + openAmount); // jitna jma hua wo balance show hona hai
         //  insallmentno.setText("Installment No :"+ " "+edtmonth.getText().toString());
 
 
-        continuebutton.setOnClickListener(new View.OnClickListener() {
+/*        continuebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 contacts_dialog.dismiss();
             }
-        });
+        });*/
+        createBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkForm()) {
 
+                    billadd();
+
+
+                }
+            }
+
+
+        });
+        printBill.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View mView) {
+
+                p1();
+
+
+            }
+        });
         contacts_dialog.show();
 
 
