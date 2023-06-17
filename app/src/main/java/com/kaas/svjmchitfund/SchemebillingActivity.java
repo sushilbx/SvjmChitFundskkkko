@@ -176,8 +176,6 @@ public class SchemebillingActivity extends Activity implements Runnable {
         });
 
 
-
-
         mScan = findViewById(R.id.Scan);
 
         mScan.setOnClickListener(new View.OnClickListener() {
@@ -230,16 +228,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
         });
 
 
-
-
-
-
-
-
-
         indexCoustmer();
-
-
 
 
         autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -259,13 +248,15 @@ public class SchemebillingActivity extends Activity implements Runnable {
                         // edtbillno.setText(Html.fromHtml(String.valueOf(customers.get(i).customer_id)));
                         edtamount.setText(Html.fromHtml(String.valueOf(customers.get(i).group.amount)));
                         printpaidamt = customers.get(i).total_amount;
-                        openingAmount.setText("Opening balance :  "+customers.get(i).group.amount); // jitna jma hua wo balance show hona hai
+                        openingAmount.setText("Opening balance :  " + customers.get(i).total_amount); // jitna jma hua wo balance show hona hai
                         int x = Integer.parseInt(customers.get(i).group.amount);
                         int y = Integer.parseInt(customers.get(i).total_amount);
 
                         //sum these two numbers
-                        int z = x + y;
-                        edttotal.setText(String.valueOf(z));
+                        // int z = x + y;
+                        int z = x * 12;
+                        edttotal.setText("Total balance :  " +String.valueOf(z));
+
                         // edtprvoius.setText(Html.fromHtml(String.valueOf(customers.get(i).installment)));
                         openAmount = Integer.parseInt(customers.get(i).total_amount);
 
@@ -662,7 +653,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
 
         customerdtname.setText("Customer Name :" + " " + edtname.getText().toString());
         customercode.setText("Customer Code :" + " " + customers_id);
-        previousbalance.setText("Customer Mobile No :" + " " + edtmobileno.getText().toString());
+        // previousbalance.setText("Customer Mobile No :" + " " + edtmobileno.getText().toString());
         closingbalance.setText("Total Amount :" + " " + edttotal.getText().toString());
         openBalance.setText("Opening Amount :" + " " + openAmount); // jitna jma hua wo balance show hona hai
         //  insallmentno.setText("Installment No :"+ " "+edtmonth.getText().toString());
@@ -678,7 +669,6 @@ public class SchemebillingActivity extends Activity implements Runnable {
             @Override
             public void onClick(View v) {
                 if (checkForm()) {
-
                     billadd();
 
 

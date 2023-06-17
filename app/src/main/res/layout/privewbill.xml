@@ -78,26 +78,7 @@
                 </TextView>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1.6"
-                android:backgroundTint="@color/white">
 
-                <TextView
-                    android:id="@+id/previousbalance"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:text="Previous Balance:"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
-
-                </TextView>
-            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -114,6 +95,26 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:text="Opening Balance:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold">
+
+                </TextView>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1.6"
+                android:backgroundTint="@color/white">
+
+                <TextView
+                    android:id="@+id/previousbalance"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text="Installment Amount :  1000"
                     android:textColor="@color/black"
                     android:textStyle="bold">
 
@@ -171,12 +172,12 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/createBill"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:gravity="center"
-                    android:text="Create Bill"
+                    android:text="Confirm &amp; Print Bill"
                     android:layout_weight="1"
 
                     android:textAllCaps="false"
@@ -187,7 +188,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/printBill"
                     android:layout_width="wrap_content"
-
+android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
