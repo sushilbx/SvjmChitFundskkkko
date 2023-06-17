@@ -267,7 +267,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                         int z = x + y;
                         edttotal.setText(String.valueOf(z));
                         // edtprvoius.setText(Html.fromHtml(String.valueOf(customers.get(i).installment)));
-                        openAmount = Integer.parseInt(customers.get(i).group.amount);
+                        openAmount = Integer.parseInt(customers.get(i).total_amount);
 
                         //  Date.setText(Html.fromHtml(String.valueOf(customers.get(i).updated_at)));
 
@@ -511,13 +511,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                     mBluetoothDevice = mBluetoothAdapter
                             .getRemoteDevice(mDeviceAddress);
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
+
                         requestpermission();
                         return;
                     }
@@ -526,8 +520,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                                     + mBluetoothDevice.getAddress(), true, false);
                     Thread mBlutoothConnectThread = new Thread(this);
                     mBlutoothConnectThread.start();
-                    // pairToDevice(mBluetoothDevice); This method is replaced by
-                    // progress dialog with thread
+
                 }
                 break;
 
@@ -546,13 +539,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
 
     private void ListPairedDevices() {
         if (ActivityCompat.checkSelfPermission(this, BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             requestpermission();
             return;
         }
@@ -569,13 +556,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
     public void run() {
         try {
             if (ActivityCompat.checkSelfPermission(this, BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
                 requestpermission();
                 return;
             }
@@ -703,20 +684,13 @@ public class SchemebillingActivity extends Activity implements Runnable {
 
                 }
             }
-
-
         });
         printBill.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
-
                 p1();
-
-
             }
         });
         contacts_dialog.show();
-
-
     }
 
     private void showrdialogpassword() {
