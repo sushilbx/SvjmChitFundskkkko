@@ -69,6 +69,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
     Button mScan, mPrint;
+    String user_id;
     TextView stat;
     EditText openingAmount;
     int openAmount;
@@ -240,13 +241,13 @@ public class SchemebillingActivity extends Activity implements Runnable {
                 for (int i = 0; i < customers.size(); i++) {
                     if (value.equalsIgnoreCase(customers.get(i).customers_id)) {
 
-
+                        user_id = customers.get(i).id;
                         edtname.setText(Html.fromHtml(String.valueOf(customers.get(i).name)));
                         edtmobileno.setText(Html.fromHtml(String.valueOf(customers.get(i).mobile)));
                         edtpalse.setText(Html.fromHtml(String.valueOf(customers.get(i).place)));
                         // edtmonth.setText(Html.fromHtml(String.valueOf(customers.get(i).month)));
                         // edtbillno.setText(Html.fromHtml(String.valueOf(customers.get(i).customer_id)));
-                        edtamount.setText(Html.fromHtml(String.valueOf(customers.get(i).group.amount)));
+                        edtamount.setText("Installment balance :  " + Html.fromHtml(String.valueOf(customers.get(i).group.amount)));
                         printpaidamt = customers.get(i).total_amount;
                         openingAmount.setText("Opening balance :  " + customers.get(i).total_amount); // jitna jma hua wo balance show hona hai
                         int x = Integer.parseInt(customers.get(i).group.amount);
@@ -255,7 +256,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                         //sum these two numbers
                         // int z = x + y;
                         int z = x * 12;
-                        edttotal.setText("Total balance :  " +String.valueOf(z));
+                        edttotal.setText("Total balance :  " + String.valueOf(z));
 
                         // edtprvoius.setText(Html.fromHtml(String.valueOf(customers.get(i).installment)));
                         openAmount = Integer.parseInt(customers.get(i).total_amount);
@@ -654,8 +655,8 @@ public class SchemebillingActivity extends Activity implements Runnable {
         customerdtname.setText("Customer Name :" + " " + edtname.getText().toString());
         customercode.setText("Customer Code :" + " " + customers_id);
         // previousbalance.setText("Customer Mobile No :" + " " + edtmobileno.getText().toString());
-        closingbalance.setText("Total Amount :" + " " + edttotal.getText().toString());
-        openBalance.setText("Opening Amount :" + " " + openAmount); // jitna jma hua wo balance show hona hai
+        closingbalance.setText("" + edttotal.getText().toString());
+        openBalance.setText("Opening Balance :" + " " + openAmount); // jitna jma hua wo balance show hona hai
         //  insallmentno.setText("Installment No :"+ " "+edtmonth.getText().toString());
 
 
@@ -670,6 +671,9 @@ public class SchemebillingActivity extends Activity implements Runnable {
             public void onClick(View v) {
                 if (checkForm()) {
                     billadd();
+                    Intent intent = new Intent(SchemebillingActivity.this, InvoiceWebViewActivity.class);
+                    intent.putExtra("value", user_id);
+                    startActivity(intent);
 
 
                 }
