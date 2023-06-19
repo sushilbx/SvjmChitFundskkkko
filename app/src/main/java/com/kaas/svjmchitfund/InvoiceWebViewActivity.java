@@ -59,7 +59,7 @@ public class InvoiceWebViewActivity extends AppCompatActivity {
         Intent i = getIntent();
         value = getIntent().getStringExtra("value");
         Log.e("value", ""+value);
-        url = "https://svjm-web.seomantras.in/api/billing/user/report/" + value;
+        url = "https://docs.google.com/gview?embedded=true&url=svjm-web.seomantras.in/api/billing/user/report?customer_id=" + value;
         orderid = getIntent().getStringExtra("id");
         backIv = (ImageView) findViewById(R.id.backIv);
 
@@ -77,9 +77,8 @@ public class InvoiceWebViewActivity extends AppCompatActivity {
 
         Wv = (WebView) findViewById(R.id.webViewAndroid);
         downloadIv = findViewById(R.id.downloadIv);
-        pd = new ProgressDialog(InvoiceWebViewActivity.this);
-        pd.setMessage("Please wait Loading...");
-        pd.show();
+
+
         WebSettings Ws = Wv.getSettings();
         Ws.setJavaScriptEnabled(true);
         Wv.getSettings().setBuiltInZoomControls(true);
@@ -94,7 +93,7 @@ public class InvoiceWebViewActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(Wv, url);
-                pd.hide();
+
             }
 
             @Override
@@ -110,7 +109,7 @@ public class InvoiceWebViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (Wv != null) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                      //  pd.show();
+
                         PrintTheWebPage(Wv);
                     } else {
                         Toast.makeText(getApplicationContext(), "Not available for device below Android LOLLIPOP", Toast.LENGTH_SHORT).show();

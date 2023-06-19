@@ -14,12 +14,15 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
@@ -46,6 +49,7 @@ import com.kaas.svjmchitfund.Module.CoustmerindexModel;
 import com.kaas.svjmchitfund.Module.EditCoustmerModel;
 import com.kaas.svjmchitfund.Module.SessionModel;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -671,20 +675,31 @@ public class SchemebillingActivity extends Activity implements Runnable {
             public void onClick(View v) {
                 if (checkForm()) {
                     billadd();
-                    Intent intent = new Intent(SchemebillingActivity.this, InvoiceWebViewActivity.class);
+                    Download_PDF_View_Intent("https://svjm-web.seomantras.in/api/billing/user/report?customer_id="+user_id);
+                  /*  Intent intent = new Intent(SchemebillingActivity.this, InvoiceWebViewActivity.class);
                     intent.putExtra("value", user_id);
-                    startActivity(intent);
+                    startActivity(intent);*/
 
 
                 }
             }
         });
+
+
+
+
+
         printBill.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
                 p1();
             }
         });
         contacts_dialog.show();
+    }
+    private void Download_PDF_View_Intent(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 
     private void showrdialogpassword() {
