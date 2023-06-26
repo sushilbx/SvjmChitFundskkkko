@@ -33,7 +33,7 @@ public class DailyReportAdapter extends RecyclerView.Adapter<DailyReportAdapter.
         this.psy = list;
         this.context = context;
         this.sessionManager = sessionManager1;
-
+        notifyDataSetChanged();
     }
 
     @Override
@@ -46,9 +46,14 @@ public class DailyReportAdapter extends RecyclerView.Adapter<DailyReportAdapter.
     public void onBindViewHolder(final DailyReportAdapter.MyViewHolder holder, final int position) {
         holder.billno.setText(psy.get(position).billings_id);
         holder.code.setText(psy.get(position).customer.customers_id);
-     //   holder.month.setText(psy.get(position).customer.name);
-        holder.total.setText(psy.get(position).customer.total_amount);
-        holder.person.setText(sessionManager.geFirstName());
+        holder.tvtotal.setText(Integer.toString(psy.get(position).customer.total_amount));
+        int x = Integer.parseInt(String.valueOf(psy.get(position).customer.total_amount));
+
+        int y = Integer.parseInt(psy.get(position).customer.installment);
+        String z = String.valueOf(x / y);
+        holder.month.setText(z);
+
+        holder.person.setText(psy.get(position).customer.name);
 
     }
 
@@ -58,23 +63,32 @@ public class DailyReportAdapter extends RecyclerView.Adapter<DailyReportAdapter.
         return this.psy.size();
     }
 
+    public int grandTotal() {
+        int totalPrice = 0;
+        for (int i = 0; i < psy.size(); i++) {
+            totalPrice += psy.get(i).customer.total_amount;
+        }
+        return totalPrice;
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView billno,code,month,total,person;
+        TextView billno,code,month,tvtotal,person;
 
         MyViewHolder(View itemView) {
             super(itemView);
             billno = itemView.findViewById(R.id.billno);
             code = itemView.findViewById(R.id.code);
-            month = itemView.findViewById(R.id.month);
-            total = itemView.findViewById(R.id.total);
+            month = itemView.findViewById(R.id.etInstallmentNo);
+            tvtotal = itemView.findViewById(R.id.tvtotal);
             person = itemView.findViewById(R.id.person);
 
 
 
 
         }
+
 
     }
 }

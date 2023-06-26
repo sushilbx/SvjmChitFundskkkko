@@ -74,7 +74,7 @@ public class ReportActivity extends Activity implements Runnable {
     protected static final String TAG = "ReportActivity";
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
-    Button mScan, mPrint, Scan2, mPrint2, mPrint1, Scan3, mPrint12, Scan12, createpdf,createpdfmonth,createpdfcustomer,createpdfyestrday;
+    Button mScan, mPrint, Scan2, mPrint2, mPrint1, Scan3, mPrint12, Scan12, createpdf, createpdfmonth, createpdfcustomer, createpdfyestrday;
     Calendar c = Calendar.getInstance();
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.US);
     final String formattedDate = df.format(c.getTime());
@@ -85,12 +85,12 @@ public class ReportActivity extends Activity implements Runnable {
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
 
-    TextView stat, bpstatus1, bpstatus2, bpstatus12;
+    TextView stat, bpstatus1, bpstatus2, bpstatus12,tvDaily;
     int printstat;
     byte FONT_TYPE;
     private static BluetoothSocket btsocket;
     private static OutputStream btoutputstream;
-    LinearLayout layout,ll_1;
+    LinearLayout layout, ll_1;
     RecyclerView recordRecycleview, monthelyreport, customerreport, yestrdayrecordRecycleview;
     SessionManager sessionManager;
     SessionModel sessionModel;
@@ -101,7 +101,7 @@ public class ReportActivity extends Activity implements Runnable {
     String Amount = "";
     ArrayAdapter<String> adapter;
     EditText name;
-    TextView month, amount, total, etmonth, code, billno;
+    TextView month, amount, total, ivDailyImage, code, billno;
     int id;
     RelativeLayout ivDaily, ivMonthly, ivCustomer, ivyestrday;
     LinearLayout llDaily, llMonthly, llcustomer, llyestrday;
@@ -125,13 +125,14 @@ public class ReportActivity extends Activity implements Runnable {
         yestrdayrecordRecycleview = findViewById(R.id.yestrdayrecordRecycleview);
         name = findViewById(R.id.name);
 
-        createpdf = findViewById(R.id.createpdf);
+        tvDaily = findViewById(R.id.tvDaily);
         createpdfmonth = findViewById(R.id.createpdfmonth);
         createpdfcustomer = findViewById(R.id.createpdfcustomer);
         createpdfyestrday = findViewById(R.id.createpdfyestrday);
 
 
         ivDaily = findViewById(R.id.ivDaily);
+        createpdf = findViewById(R.id.createpdf);
         llDaily = findViewById(R.id.llDaily);
 
         llMonthly = findViewById(R.id.llMonthly);
@@ -148,7 +149,7 @@ public class ReportActivity extends Activity implements Runnable {
         month = findViewById(R.id.month);
         amount = findViewById(R.id.amount);
         total = findViewById(R.id.total);
-     //   etmonth = findViewById(R.id.etmonth);
+        //   etmonth = findViewById(R.id.etmonth);
         code = findViewById(R.id.code);
         billno = findViewById(R.id.billno);
         monthelyreport = findViewById(R.id.monthelyreport);
@@ -174,23 +175,12 @@ public class ReportActivity extends Activity implements Runnable {
         ll_1 = findViewById(R.id.ll_1);
 
 
-
         ll_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-
-
-
-
-
-
-
-
-
-
 
 
         // ReportAdapter adaptersblog = new ReportAdapter(ReportActivity.this);
@@ -209,11 +199,11 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llMonthly.getVisibility() == View.VISIBLE) {
                     llMonthly.setVisibility(View.GONE);
-                   // ivMonthly.setImageResource(R.mipmap.arrowup);
+                    // ivMonthly.setImageResource(R.mipmap.arrowup);
                 } else {
                     llMonthly.setVisibility(View.VISIBLE);
                 }
-             //   ivMonthly.setImageResource(R.mipmap.arrowdown);
+                //   ivMonthly.setImageResource(R.mipmap.arrowdown);
 
 
             }
@@ -225,12 +215,11 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llDaily.getVisibility() == View.VISIBLE) {
                     llDaily.setVisibility(View.GONE);
-                   // ivDaily.setImageResource(R.mipmap.arrowup);
+                    // ivDaily.setImageResource(R.mipmap.arrowup);
                 } else {
                     llDaily.setVisibility(View.VISIBLE);
-                  //  ivDaily.setImageResource(R.mipmap.arrowdown);
+                    //  ivDaily.setImageResource(R.mipmap.arrowdown);
                 }
-
 
 
             }
@@ -241,11 +230,11 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llcustomer.getVisibility() == View.VISIBLE) {
                     llcustomer.setVisibility(View.GONE);
-                   // ivCustomer.setImageResource(R.mipmap.arrowup);
+                    // ivCustomer.setImageResource(R.mipmap.arrowup);
                 } else {
                     llcustomer.setVisibility(View.VISIBLE);
                 }
-               // ivCustomer.setImageResource(R.mipmap.arrowdown);
+                // ivCustomer.setImageResource(R.mipmap.arrowdown);
 
 
             }
@@ -257,11 +246,11 @@ public class ReportActivity extends Activity implements Runnable {
                 // Toast.makeText(ReportActivity.this, "jyOTI", Toast.LENGTH_SHORT).show();
                 if (llyestrday.getVisibility() == View.VISIBLE) {
                     llyestrday.setVisibility(View.GONE);
-                   // ivyestrday.setImageResource(R.mipmap.arrowup);
+                    // ivyestrday.setImageResource(R.mipmap.arrowup);
                 } else {
                     llyestrday.setVisibility(View.VISIBLE);
                 }
-              //  ivyestrday.setImageResource(R.mipmap.arrowdown);
+                //  ivyestrday.setImageResource(R.mipmap.arrowdown);
 
 
             }
@@ -703,7 +692,6 @@ public class ReportActivity extends Activity implements Runnable {
         });
 
 
-
         createpdfmonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -883,8 +871,6 @@ public class ReportActivity extends Activity implements Runnable {
         });
 
 
-
-
         // CustomernewAdapter headlineAdapter1 = new CustomernewAdapter(ReportActivity.this);
         //  customerreport.setAdapter(headlineAdapter1);
 /*
@@ -905,228 +891,218 @@ public class ReportActivity extends Activity implements Runnable {
         Yestrdayreport();
 
     }
-        private boolean savePdfFile (Context context, List<TodayreportModel.Today> myPurchases){
+
+    private boolean savePdfFile(Context context, List<TodayreportModel.Today> myPurchases) {
 
 
-            boolean success = false;
+        boolean success = false;
+        try {
+
+            PDFCreater pdfCreater = new PDFCreater();
             try {
 
-                PDFCreater pdfCreater = new PDFCreater();
+                String row = "";
+
                 try {
-
-                    String row = "";
-
-                    try {
-                        row = getpayment(myPurchases, row);
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-                    }
-
-                    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                    String name = "dailyreport" + ".pdf";
-
-                    File file = new File(path, name);
-                    //  file.createNewFile();
-                    try {
-                        if (!file.exists()) {
-                            file.createNewFile();
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] slide_836_bytes = row.getBytes();
-                    incomefile = new File(file.getAbsolutePath());
-                    success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
-                      return success;
+                    row = getpayment(myPurchases, row);
 
                 } catch (Exception e) {
+
                     e.printStackTrace();
-                    Constant.log("NAANA", e.toString());
                 }
 
-                // return success;
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                String name = "dailyreport" + ".pdf";
+
+                File file = new File(path, name);
+                //  file.createNewFile();
+                try {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                byte[] slide_836_bytes = row.getBytes();
+                incomefile = new File(file.getAbsolutePath());
+                success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
+                return success;
+
             } catch (Exception e) {
-                Constant.log(TAG, e.getMessage());
                 e.printStackTrace();
+                Constant.log("NAANA", e.toString());
             }
 
-            return false;
+            // return success;
+        } catch (Exception e) {
+            Constant.log(TAG, e.getMessage());
+            e.printStackTrace();
         }
-        private boolean savePdfFile1 (Context context, List<MonthlyreportModel.Today> myPurchases){
+
+        return false;
+    }
+
+    private boolean savePdfFile1(Context context, List<MonthlyreportModel.Today> myPurchases) {
 
 
-            boolean success = false;
+        boolean success = false;
+        try {
+
+            PDFCreater pdfCreater = new PDFCreater();
             try {
 
-                PDFCreater pdfCreater = new PDFCreater();
+                String row = "";
+
                 try {
-
-                    String row = "";
-
-                    try {
-                        row = getpayment1(myPurchases, row);
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-                    }
-
-                    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                    String name = "Monthlyreport" + ".pdf";
-
-                    File file = new File(path, name);
-                    //  file.createNewFile();
-                    try {
-                        if (!file.exists()) {
-                            file.createNewFile();
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] slide_836_bytes = row.getBytes();
-                    incomefile = new File(file.getAbsolutePath());
-                    success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
-                      return success;
+                    row = getpayment1(myPurchases, row);
 
                 } catch (Exception e) {
+
                     e.printStackTrace();
-                    Constant.log("NAANA", e.toString());
                 }
 
-                // return success;
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                String name = "Monthlyreport" + ".pdf";
+
+                File file = new File(path, name);
+                //  file.createNewFile();
+                try {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                byte[] slide_836_bytes = row.getBytes();
+                incomefile = new File(file.getAbsolutePath());
+                success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
+                return success;
+
             } catch (Exception e) {
-                Constant.log(TAG, e.getMessage());
                 e.printStackTrace();
+                Constant.log("NAANA", e.toString());
             }
 
-            return false;
+            // return success;
+        } catch (Exception e) {
+            Constant.log(TAG, e.getMessage());
+            e.printStackTrace();
         }
-        private boolean savePdfFile2 (Context context, List<CustomerreportModel.Customer_report> myPurchases){
+
+        return false;
+    }
+
+    private boolean savePdfFile2(Context context, List<CustomerreportModel.Customer_report> myPurchases) {
 
 
-            boolean success = false;
+        boolean success = false;
+        try {
+
+            PDFCreater pdfCreater = new PDFCreater();
             try {
 
-                PDFCreater pdfCreater = new PDFCreater();
+                String row = "";
+
                 try {
-
-                    String row = "";
-
-                    try {
-                        row = getpayment2(myPurchases, row);
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-                    }
-
-                    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                    String name = "Customer report" + ".pdf";
-
-                    File file = new File(path, name);
-                    //  file.createNewFile();
-                    try {
-                        if (!file.exists()) {
-                            file.createNewFile();
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] slide_836_bytes = row.getBytes();
-                    incomefile = new File(file.getAbsolutePath());
-                    success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
-                      return success;
+                    row = getpayment2(myPurchases, row);
 
                 } catch (Exception e) {
+
                     e.printStackTrace();
-                    Constant.log("NAANA", e.toString());
                 }
 
-                // return success;
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                String name = "Customer report" + ".pdf";
+
+                File file = new File(path, name);
+                //  file.createNewFile();
+                try {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                byte[] slide_836_bytes = row.getBytes();
+                incomefile = new File(file.getAbsolutePath());
+                success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
+                return success;
+
             } catch (Exception e) {
-                Constant.log(TAG, e.getMessage());
                 e.printStackTrace();
+                Constant.log("NAANA", e.toString());
             }
 
-            return false;
+            // return success;
+        } catch (Exception e) {
+            Constant.log(TAG, e.getMessage());
+            e.printStackTrace();
         }
-        private boolean savePdfFile3 (Context context, List<YestrdayreportModel.Yesterday_report> myPurchases){
+
+        return false;
+    }
+
+    private boolean savePdfFile3(Context context, List<YestrdayreportModel.Yesterday_report> myPurchases) {
 
 
-            boolean success = false;
+        boolean success = false;
+        try {
+
+            PDFCreater pdfCreater = new PDFCreater();
             try {
 
-                PDFCreater pdfCreater = new PDFCreater();
+                String row = "";
+
                 try {
-
-                    String row = "";
-
-                    try {
-                        row = getpayment3(myPurchases, row);
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-                    }
-
-                    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                    String name = "Yestrday report" + ".pdf";
-
-                    File file = new File(path, name);
-                    //  file.createNewFile();
-                    try {
-                        if (!file.exists()) {
-                            file.createNewFile();
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] slide_836_bytes = row.getBytes();
-                    incomefile = new File(file.getAbsolutePath());
-                    success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
-                      return success;
+                    row = getpayment3(myPurchases, row);
 
                 } catch (Exception e) {
+
                     e.printStackTrace();
-                    Constant.log("NAANA", e.toString());
                 }
 
-                // return success;
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                String name = "Yestrday report" + ".pdf";
+
+                File file = new File(path, name);
+                //  file.createNewFile();
+                try {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                byte[] slide_836_bytes = row.getBytes();
+                incomefile = new File(file.getAbsolutePath());
+                success = pdfCreater.createPDF(name, String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)), slide_836_bytes, "https://www.cpconverge.com/assets/admin/layout/img/converge-logo.png");
+                return success;
+
             } catch (Exception e) {
-                Constant.log(TAG, e.getMessage());
                 e.printStackTrace();
+                Constant.log("NAANA", e.toString());
             }
 
-            return false;
+            // return success;
+        } catch (Exception e) {
+            Constant.log(TAG, e.getMessage());
+            e.printStackTrace();
         }
 
-
-
-
-
-
-
-
-
-
-
-
+        return false;
+    }
 
 
     @Nullable
-    private String getpayment(List<TodayreportModel.Today> visaFinanceDataDetail,  String rows) {
+    private String getpayment(List<TodayreportModel.Today> visaFinanceDataDetail, String rows) {
         try {
 
 
-
-
-            String csvString="";
+            String csvString = "";
             //  String csvString11="";
 
             csvString = "<html>" +
@@ -1140,12 +1116,11 @@ public class ReportActivity extends Activity implements Runnable {
                     "    </head>" +
                     "    <body>" +
 
-                    csvString+("<h2>Daily Report</h2>")+
-                    csvString+("<table style=\"width:100%\">");
+                    csvString + ("<h2>Daily Report</h2>") +
+                    csvString + ("<table style=\"width:100%\">");
 
 
-
-            csvString=csvString+("<tr>\n" +
+            csvString = csvString + ("<tr>\n" +
                     "    <th>Bill No</th>\n" +
                     "    <th>Customer Code</th>\n" +
                     "    <th>Name </th>\n" +
@@ -1154,59 +1129,37 @@ public class ReportActivity extends Activity implements Runnable {
                     "  </tr>");
 
 
-            for (int i=0;i<visaFinanceDataDetail.size();i++)
-            {
-                csvString=csvString+(" <tr>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).billings_id+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.customers_id+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.name+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.total_amount+"</td>" +
-                        "    <td>"+sessionManager.geFirstName()+"</td>" +
+            for (int i = 0; i < visaFinanceDataDetail.size(); i++) {
+                csvString = csvString + (" <tr>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).billings_id + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.customers_id + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.name + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.total_amount + "</td>" +
+                        "    <td>" + sessionManager.geFirstName() + "</td>" +
                         "  </tr>");
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            csvString=csvString+("<td style=\"height:10px\"></td>"+"  </table></body></html>");
-
-
+            csvString = csvString + ("<td style=\"height:10px\"></td>" + "  </table></body></html>");
 
 
             Constant.log(TAG, "Rows:  " + csvString);
 
 
-
-
             rows = rows + csvString;
             //  return csvString;
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return rows;
     }
 
-    private String getpayment1(List<MonthlyreportModel.Today> visaFinanceDataDetail,  String rows) {
+    private String getpayment1(List<MonthlyreportModel.Today> visaFinanceDataDetail, String rows) {
         try {
 
 
-
-
-            String csvString="";
+            String csvString = "";
             //  String csvString11="";
 
             csvString = "<html>" +
@@ -1220,72 +1173,50 @@ public class ReportActivity extends Activity implements Runnable {
                     "    </head>" +
                     "    <body>" +
 
-                    csvString+("<h2>Monthly Report</h2>")+
-                    csvString+("<table style=\"width:100%\">");
+                    csvString + ("<h2>Monthly Report</h2>") +
+                    csvString + ("<table style=\"width:100%\">");
 
 
-
-            csvString=csvString+("<tr>\n" +
+            csvString = csvString + ("<tr>\n" +
                     "    <th>Date</th>\n" +
                     "    <th>Bill No</th>\n" +
-                 //   "    <th>Month</th>\n" +
+                    //   "    <th>Month</th>\n" +
                     "    <th>Collection Person Name</th>\n" +
                     "    <th>Total</th>\n" +
                     "  </tr>");
 
 
-            for (int i=0;i<visaFinanceDataDetail.size();i++)
-            {
-                csvString=csvString+(" <tr>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).created+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).billings_id+"</td>\n" +
-                     //   "    <td>"+visaFinanceDataDetail.get(i).customer.month+"</td>\n" +
-                        "    <td>"+sessionManager.geFirstName()+"</td>" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.total_amount+"</td>" +
+            for (int i = 0; i < visaFinanceDataDetail.size(); i++) {
+                csvString = csvString + (" <tr>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).created + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).billings_id + "</td>\n" +
+                        //   "    <td>"+visaFinanceDataDetail.get(i).customer.month+"</td>\n" +
+                        "    <td>" + sessionManager.geFirstName() + "</td>" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.total_amount + "</td>" +
                         "  </tr>");
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            csvString=csvString+("<td style=\"height:10px\"></td>"+"  </table></body></html>");
-
-
+            csvString = csvString + ("<td style=\"height:10px\"></td>" + "  </table></body></html>");
 
 
             Constant.log(TAG, "Rows:  " + csvString);
 
 
-
-
             rows = rows + csvString;
             //  return csvString;
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return rows;
     }
+
     private String getpayment2(List<CustomerreportModel.Customer_report> visaFinanceDataDetail, String rows) {
         try {
 
 
-
-
-            String csvString="";
+            String csvString = "";
             //  String csvString11="";
 
             csvString = "<html>" +
@@ -1299,12 +1230,11 @@ public class ReportActivity extends Activity implements Runnable {
                     "    </head>" +
                     "    <body>" +
 
-                    csvString+("<h2>Customer Report</h2>")+
-                    csvString+("<table style=\"width:100%\">");
+                    csvString + ("<h2>Customer Report</h2>") +
+                    csvString + ("<table style=\"width:100%\">");
 
 
-
-            csvString=csvString+("<tr>\n" +
+            csvString = csvString + ("<tr>\n" +
                     "    <th>Customer_id</th>\n" +
                     "    <th>Bill No</th>\n" +
                     "    <th>Name</th>\n" +
@@ -1313,59 +1243,38 @@ public class ReportActivity extends Activity implements Runnable {
                     "  </tr>");
 
 
-            for (int i=0;i<visaFinanceDataDetail.size();i++)
-            {
-                csvString=csvString+(" <tr>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.customers_id+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).billings_id+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.name+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.total_amount+"</td>" +
-                        "    <td>"+sessionManager.geFirstName()+"</td>" +
+            for (int i = 0; i < visaFinanceDataDetail.size(); i++) {
+                csvString = csvString + (" <tr>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.customers_id + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).billings_id + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.name + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.total_amount + "</td>" +
+                        "    <td>" + sessionManager.geFirstName() + "</td>" +
 
                         "  </tr>");
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            csvString=csvString+("<td style=\"height:10px\"></td>"+"  </table></body></html>");
-
-
+            csvString = csvString + ("<td style=\"height:10px\"></td>" + "  </table></body></html>");
 
 
             Constant.log(TAG, "Rows:  " + csvString);
 
 
-
-
             rows = rows + csvString;
             //  return csvString;
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return rows;
     }
-    private String getpayment3(List<YestrdayreportModel.Yesterday_report> visaFinanceDataDetail,  String rows) {
+
+    private String getpayment3(List<YestrdayreportModel.Yesterday_report> visaFinanceDataDetail, String rows) {
         try {
 
 
-
-
-            String csvString="";
+            String csvString = "";
             //  String csvString11="";
 
             csvString = "<html>" +
@@ -1379,12 +1288,11 @@ public class ReportActivity extends Activity implements Runnable {
                     "    </head>" +
                     "    <body>" +
 
-                    csvString+("<h2>Yestrday Report</h2>")+
-                    csvString+("<table style=\"width:100%\">");
+                    csvString + ("<h2>Yestrday Report</h2>") +
+                    csvString + ("<table style=\"width:100%\">");
 
 
-
-            csvString=csvString+("<tr>\n" +
+            csvString = csvString + ("<tr>\n" +
                     "    <th>Bill No</th>\n" +
                     "    <th>Customer_id </th>\n" +
                     "    <th>Name</th>\n" +
@@ -1394,54 +1302,32 @@ public class ReportActivity extends Activity implements Runnable {
                     "  </tr>");
 
 
-            for (int i=0;i<visaFinanceDataDetail.size();i++)
-            {
-                csvString=csvString+(" <tr>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).billings_id+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customers_id+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.name+"</td>\n" +
-                        "    <td>"+visaFinanceDataDetail.get(i).customer.total_amount+"</td>" +
-                        "    <td>"+sessionManager.geFirstName()+"</td>" +
+            for (int i = 0; i < visaFinanceDataDetail.size(); i++) {
+                csvString = csvString + (" <tr>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).billings_id + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customers_id + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.name + "</td>\n" +
+                        "    <td>" + visaFinanceDataDetail.get(i).customer.total_amount + "</td>" +
+                        "    <td>" + sessionManager.geFirstName() + "</td>" +
 
                         "  </tr>");
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            csvString=csvString+("<td style=\"height:10px\"></td>"+"  </table></body></html>");
-
-
+            csvString = csvString + ("<td style=\"height:10px\"></td>" + "  </table></body></html>");
 
 
             Constant.log(TAG, "Rows:  " + csvString);
 
 
-
-
             rows = rows + csvString;
             //  return csvString;
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return rows;
     }
-
-
 
 
     public String get_mime_type(String url) {
@@ -1454,7 +1340,7 @@ public class ReportActivity extends Activity implements Runnable {
     }
 
 
- private void todayReport() {
+    private void todayReport() {
 
         Log.e("sushiltoken", sessionModel.token);
         Call<TodayreportModel> call = RetrofitClient.getInstance().getApi().customerreport(String.format("Bearer %s", sessionModel.token));
@@ -1463,11 +1349,16 @@ public class ReportActivity extends Activity implements Runnable {
             public void onResponse(Call<TodayreportModel> call, Response<TodayreportModel> response) {
                 Log.d("sushil", "ok" + response.isSuccessful() + ", code: " + response.code());
                 if (response.isSuccessful()) {
-                     Constant.log("snxkns",sessionManager.geFirstName());                 //   Toast.makeText(ReportActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
+                    Constant.log("snxkns", sessionManager.geFirstName());                 //   Toast.makeText(ReportActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
                     todays.clear();
-                    todays=response.body().today_report;
-                    DailyReportAdapter DailyReportAdapter = new DailyReportAdapter(response.body().today_report, ReportActivity.this,sessionManager);
-                    recordRecycleview.setAdapter(DailyReportAdapter);
+                    todays = response.body().today_report;
+
+                    DailyReportAdapter dailyReportAdapter = new DailyReportAdapter(response.body().today_report, ReportActivity.this, sessionManager);
+
+                    recordRecycleview.setAdapter(dailyReportAdapter);
+                    String total = String.valueOf(dailyReportAdapter.grandTotal());
+                    tvDaily.setText("Total Collection of the Day :     "+"₹ "+total);
+
 
                 }
             }
@@ -1479,12 +1370,7 @@ public class ReportActivity extends Activity implements Runnable {
             }
         });
     }
-
-
-
-
-     private void monthlyreport() {
-
+    private void monthlyreport() {
         Log.e("sushiltoken", sessionModel.token);
         Call<MonthlyreportModel> call = RetrofitClient.getInstance().getApi().monthlyreport(String.format("Bearer %s", sessionModel.token));
         call.enqueue(new Callback<MonthlyreportModel>() {
@@ -1495,14 +1381,9 @@ public class ReportActivity extends Activity implements Runnable {
 
                     //   Toast.makeText(ReportActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
                     monthY.clear();
-                    monthY=response.body().monthly_report;
+                    monthY = response.body().monthly_report;
                     CustomerReportAdapter CustomerReportAdapter = new CustomerReportAdapter(response.body().monthly_report, ReportActivity.this);
                     monthelyreport.setAdapter(CustomerReportAdapter);
-
-
-
-
-
 
 
                 }
@@ -1528,17 +1409,11 @@ public class ReportActivity extends Activity implements Runnable {
                 if (response.isSuccessful()) {
 
 
-
                     //   Toast.makeText(ReportActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
                     customer_report.clear();
-                    customer_report =response.body().customer_report;
+                    customer_report = response.body().customer_report;
                     CustomernewReportAdapter CustomerReportAdapter = new CustomernewReportAdapter(response.body().customer_report, ReportActivity.this);
                     customerreport.setAdapter(CustomerReportAdapter);
-
-
-
-
-
 
 
                 }
@@ -1551,6 +1426,7 @@ public class ReportActivity extends Activity implements Runnable {
             }
         });
     }
+
     private void Yestrdayreport() {
 
         Log.e("sushiltoken", sessionModel.token);
@@ -1562,17 +1438,11 @@ public class ReportActivity extends Activity implements Runnable {
                 if (response.isSuccessful()) {
 
 
-
                     //   Toast.makeText(ReportActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
                     yesterday_report.clear();
-                    yesterday_report=response.body().yesterday_report;
+                    yesterday_report = response.body().yesterday_report;
                     YestrdayReportAdapter CustomerReportAdapter1 = new YestrdayReportAdapter(response.body().yesterday_report, ReportActivity.this);
                     yestrdayrecordRecycleview.setAdapter(CustomerReportAdapter1);
-
-
-
-
-
 
 
                 }
@@ -1587,7 +1457,7 @@ public class ReportActivity extends Activity implements Runnable {
     }
 
     private void indexCoustmer() {
-       // Log.e("sushiltoken", sessionModel.token);
+        // Log.e("sushiltoken", sessionModel.token);
         Call<CoustmerindexModel> call = RetrofitClient.getInstance().getApi().indexCoustmer(String.format("Bearer %s", sessionModel.token));
         call.enqueue(new Callback<com.kaas.svjmchitfund.Module.CoustmerindexModel>() {
             @Override
@@ -1597,14 +1467,13 @@ public class ReportActivity extends Activity implements Runnable {
 
 
                     customers.clear();
-                    customers=(response.body().customer);
-                    for (int i=0;i<response.body().customer.size();i++)
-                    {
+                    customers = (response.body().customer);
+                    for (int i = 0; i < response.body().customer.size(); i++) {
                         customercode.add(response.body().customer.get(i).customers_id);
                     }
 
                     adapter = new ArrayAdapter<String>
-                            (context,android.R.layout.select_dialog_item, customercode);
+                            (context, android.R.layout.select_dialog_item, customercode);
 
                     autocomplete.setThreshold(2);
                     autocomplete.setAdapter(adapter);
@@ -1629,7 +1498,6 @@ public class ReportActivity extends Activity implements Runnable {
 */
 
 
-
                 }
             }
 
@@ -1641,6 +1509,7 @@ public class ReportActivity extends Activity implements Runnable {
             }
         });
     }
+
     public void p1() {
 
         Thread t = new Thread() {
@@ -1669,30 +1538,18 @@ public class ReportActivity extends Activity implements Runnable {
                     header = "B.No    Code    Month    Total\n";
 
 
-
-
-
-
-
                     os.write(blank.getBytes());
                     os.write(he.getBytes());
                     os.write(header.getBytes());
 
 
-
-                    for (int i = 0; i < todays.size(); i++)
-                    {
-                        BILL =    todays.get(i).billings_id+"     "+" "+todays.get(i).customer.customers_id+"     "+todays.get(i).customer.month+"     "+todays.get(i).customer.total_amount+ "\n";
+                    for (int i = 0; i < todays.size(); i++) {
+                        BILL = todays.get(i).billings_id + "     " + " " + todays.get(i).customer.customers_id + "     " + todays.get(i).customer.month + "     " + todays.get(i).customer.total_amount + "\n";
                         os.write(BILL.getBytes());
                     }
 
 
-
-
-
-
-
-                    time =  "\n"+formattedDate + "\n"+"--------------------------------\n\n\n";
+                    time = "\n" + formattedDate + "\n" + "--------------------------------\n\n\n";
 
                     os.write(checktop_status.getBytes());
                     os.write(time.getBytes());
@@ -1723,6 +1580,7 @@ public class ReportActivity extends Activity implements Runnable {
         };
         t.start();
     }
+
     public void p2() {
 
         Thread t = new Thread() {
@@ -1751,30 +1609,18 @@ public class ReportActivity extends Activity implements Runnable {
                     header = "Date      B.No     Month    Total\n";
 
 
-
-
-
-
-
                     os.write(blank.getBytes());
                     os.write(he.getBytes());
                     os.write(header.getBytes());
 
 
-
-                    for (int i = 0; i < monthY.size(); i++)
-                    {
-                        BILL = monthY.get(i).created+" "+" "+monthY.get(i).id+"    "+ monthY.get(i).customer.month+"    "+monthY.get(i).customer.total_amount+ "\n";
+                    for (int i = 0; i < monthY.size(); i++) {
+                        BILL = monthY.get(i).created + " " + " " + monthY.get(i).id + "    " + monthY.get(i).customer.month + "    " + monthY.get(i).customer.total_amount + "\n";
                         os.write(BILL.getBytes());
                     }
 
 
-
-
-
-
-
-                    time =  "\n"+formattedDate + "\n"+"--------------------------------\n\n\n";
+                    time = "\n" + formattedDate + "\n" + "--------------------------------\n\n\n";
 
                     os.write(checktop_status.getBytes());
                     os.write(time.getBytes());
@@ -1805,6 +1651,7 @@ public class ReportActivity extends Activity implements Runnable {
         };
         t.start();
     }
+
     public void p3() {
 
         Thread t = new Thread() {
@@ -1833,30 +1680,18 @@ public class ReportActivity extends Activity implements Runnable {
                     header = "Customer ID      B.No     Name    Total\n";
 
 
-
-
-
-
-
                     os.write(blank.getBytes());
                     os.write(he.getBytes());
                     os.write(header.getBytes());
 
 
-
-                    for (int i = 0; i < customer_report.size(); i++)
-                    {
-                        BILL = customer_report.get(i).customers_id+" "+" "+ customer_report.get(i).id+"    "+customer_report.get(i).customer.name+"    "+ customer_report.get(i).customer.total_amount+ "\n";
+                    for (int i = 0; i < customer_report.size(); i++) {
+                        BILL = customer_report.get(i).customers_id + " " + " " + customer_report.get(i).id + "    " + customer_report.get(i).customer.name + "    " + customer_report.get(i).customer.total_amount + "\n";
                         os.write(BILL.getBytes());
                     }
 
 
-
-
-
-
-
-                    time =  "\n"+formattedDate + "\n"+"--------------------------------\n\n\n";
+                    time = "\n" + formattedDate + "\n" + "--------------------------------\n\n\n";
 
                     os.write(checktop_status.getBytes());
                     os.write(time.getBytes());
@@ -1887,6 +1722,7 @@ public class ReportActivity extends Activity implements Runnable {
         };
         t.start();
     }
+
     public void p4() {
 
         Thread t = new Thread() {
@@ -1915,30 +1751,18 @@ public class ReportActivity extends Activity implements Runnable {
                     header = "Customer ID      B.No     Name    Total\n";
 
 
-
-
-
-
-
                     os.write(blank.getBytes());
                     os.write(he.getBytes());
                     os.write(header.getBytes());
 
 
-
-                    for (int i = 0; i < yesterday_report.size(); i++)
-                    {
-                        BILL = yesterday_report.get(i).customers_id+" "+" "+ yesterday_report.get(i).billings_id+"    "+ yesterday_report.get(i).customer.name+"    "+ yesterday_report.get(i).customer.total_amount+ "\n";
+                    for (int i = 0; i < yesterday_report.size(); i++) {
+                        BILL = yesterday_report.get(i).customers_id + " " + " " + yesterday_report.get(i).billings_id + "    " + yesterday_report.get(i).customer.name + "    " + yesterday_report.get(i).customer.total_amount + "\n";
                         os.write(BILL.getBytes());
                     }
 
 
-
-
-
-
-
-                    time =  "\n"+formattedDate + "\n"+"--------------------------------\n\n\n";
+                    time = "\n" + formattedDate + "\n" + "--------------------------------\n\n\n";
 
                     os.write(checktop_status.getBytes());
                     os.write(time.getBytes());
@@ -1971,12 +1795,6 @@ public class ReportActivity extends Activity implements Runnable {
     }
 
 
-
-
-
-
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -1988,6 +1806,7 @@ public class ReportActivity extends Activity implements Runnable {
             Log.e("Tag", "Exe ", e);
         }
     }
+
     public void onActivityResult(int mRequestCode, int mResultCode,
                                  Intent mDataIntent) {
         super.onActivityResult(mRequestCode, mResultCode, mDataIntent);
@@ -2034,6 +1853,7 @@ public class ReportActivity extends Activity implements Runnable {
                 break;
         }
     }
+
     private void ListPairedDevices() {
         if (ActivityCompat.checkSelfPermission(this, BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -2055,6 +1875,7 @@ public class ReportActivity extends Activity implements Runnable {
             }
         }
     }
+
     public void run() {
         try {
             if (ActivityCompat.checkSelfPermission(this, BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
@@ -2079,11 +1900,13 @@ public class ReportActivity extends Activity implements Runnable {
             return;
         }
     }
+
     private void requestpermission() {
 
-        requestPermissions(new String[]{BLUETOOTH_CONNECT,BLUETOOTH_SCAN}, PERMISSION_REQUEST_CODE);
+        requestPermissions(new String[]{BLUETOOTH_CONNECT, BLUETOOTH_SCAN}, PERMISSION_REQUEST_CODE);
 
     }
+
     private void closeSocket(BluetoothSocket nOpenSocket) {
         try {
             nOpenSocket.close();
@@ -2092,6 +1915,7 @@ public class ReportActivity extends Activity implements Runnable {
             Log.d(TAG, "CouldNotCloseSocket");
         }
     }
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
@@ -2122,10 +1946,9 @@ public class ReportActivity extends Activity implements Runnable {
             Scan12.setText("Disconnect");
 
 
-
-
         }
     };
+
     public static byte intToByteArray(int value) {
         byte[] b = ByteBuffer.allocate(4).putInt(value).array();
 
@@ -2136,8 +1959,6 @@ public class ReportActivity extends Activity implements Runnable {
 
         return b[3];
     }
-
-
 
 
 }

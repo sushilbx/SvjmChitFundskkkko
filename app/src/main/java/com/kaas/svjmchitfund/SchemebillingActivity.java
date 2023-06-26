@@ -251,7 +251,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                         edtpalse.setText(Html.fromHtml(String.valueOf(customers.get(i).place)));
                         // edtmonth.setText(Html.fromHtml(String.valueOf(customers.get(i).month)));
                         // edtbillno.setText(Html.fromHtml(String.valueOf(customers.get(i).customer_id)));
-                        edtamount.setText("Installment balance :  " + Html.fromHtml(String.valueOf(customers.get(i).group.amount)));
+                        edtamount.setText("Installment amount :  " + Html.fromHtml(String.valueOf(customers.get(i).group.amount)));
                         printpaidamt = customers.get(i).total_amount;
                         openingAmount.setText("Opening balance :  " + customers.get(i).total_amount); // jitna jma hua wo balance show hona hai
                         int x = Integer.parseInt(customers.get(i).group.amount);
@@ -259,7 +259,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
 
                         //sum these two numbers
                         // int z = x + y;
-                        int z = x * 12;
+                        int z = x + y;
                         edttotal.setText("Total balance :  " + String.valueOf(z));
 
                         // edtprvoius.setText(Html.fromHtml(String.valueOf(customers.get(i).installment)));
@@ -268,7 +268,7 @@ public class SchemebillingActivity extends Activity implements Runnable {
                         //  Date.setText(Html.fromHtml(String.valueOf(customers.get(i).updated_at)));
 
 
-                        customers_id = String.valueOf(customers.get(i).id);
+                        customers_id = String.valueOf(customers.get(i).customers_id);
 
 
                     }

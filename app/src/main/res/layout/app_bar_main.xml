@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".MainActivity">
+
     <com.google.android.material.appbar.AppBarLayout
 
         android:id="@+id/appbar"
@@ -18,41 +19,39 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:popupTheme="@style/ThemeOverlay.Material3.NavigationView"
-            >
-        <LinearLayout
-            android:id="@+id/ll_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            app:popupTheme="@style/ThemeOverlay.Material3.NavigationView">
+
+            <LinearLayout
+                android:id="@+id/ll_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
 
-            <ImageView
-                android:id="@+id/menuicone"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/menu"
-                >
+                <ImageView
+                    android:id="@+id/menuicone"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/menu">
 
-            </ImageView>
-<TextView
-    android:id="@+id/welcome"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Welcome User!!"
-android:textColor="@color/black"
-    android:textStyle="bold"
-    android:textSize="16sp"
-    android:layout_marginStart="20dp"
-    >
+                </ImageView>
 
+                <TextView
+                    android:id="@+id/welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Welcome User!!"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold">
 
 
-</TextView>
+                </TextView>
 
 
-        </LinearLayout>
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
 

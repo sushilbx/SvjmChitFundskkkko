@@ -25,7 +25,7 @@ public class TodayreportModel {
             public String customers_id;
             public String  amount;
             public String  group_id;
-            public String total_amount;
+            public int total_amount;
             public String mobile;
             public String route;
             public String installment;

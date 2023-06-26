@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ReportActivity">
 
     <LinearLayout
@@ -32,6 +32,15 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:text="Total Price"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -56,15 +65,13 @@
                 android:orientation="vertical">
 
 
-
                 <RelativeLayout
                     android:id="@+id/ivDaily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
 
-                    android:background="#F0F4FE"
-                    >
+                    android:background="#F0F4FE">
 
 
                     <TextView
@@ -96,85 +103,77 @@
 
 
                 </RelativeLayout>
-              <!--daily report-->
+                <!--daily report-->
 
                 <LinearLayout
                     android:id="@+id/llDaily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    >
+                    android:orientation="vertical">
+
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="start"
-                        android:layout_margin="10dp">
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="start">
 
                         <TableRow
+                            android:layout_height="match_parent"
                             android:background="@color/white"
-                            android:padding="5dp"
-                            >
+                            android:padding="5dp">
 
                             <TextView
                                 android:id="@+id/billno"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="Bill No"
                                 android:gravity="center"
+                                android:text="Bill No"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/code"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Code"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
                                 android:layout_marginStart="4dp"
+                                android:layout_weight="1"
                                 android:gravity="center"
+                                android:text="Code"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
-<!--
+
                             <TextView
                                 android:id="@+id/etmonth"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="Customer Name"
                                 android:gravity="center"
-
+                                android:text="Instalment no"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
--->
-
 
 
                             <TextView
                                 android:id="@+id/total"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="Total"
                                 android:gravity="center"
-                                  android:layout_marginStart="4dp"
+                                android:text="Total"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
-
-
                             <TextView
                                 android:id="@+id/pesron"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="Person Name"
                                 android:gravity="center"
-
+                                android:text="Person Name"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -182,57 +181,46 @@
                         </TableRow>
 
 
-
-
-
                     </TableLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/black" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recordRecycleview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/dailyreport"
-                        android:orientation="vertical" />
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                    <TextView
+                        android:id="@+id/tvDaily"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:text="Total : "
+                        android:textColor="#06c439" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="2"
-
-                        >
+                        android:weightSum="2">
 
                         <Button
                             android:id="@+id/createpdf"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:layout_weight="1"
                             android:layout_margin="10dp"
-                            android:textAllCaps="false"
+                            android:layout_weight="1"
                             android:backgroundTint="#393185"
                             android:text="Create Pdf File"
-
-                            >
-
-
-                        </Button>
-
-
-
-
-
-
-
-
+                            android:textAllCaps="false"></Button>
                     </LinearLayout>
-
-
-
-
-
-
 
 
                     <LinearLayout
@@ -280,12 +268,12 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/l1"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:weightSum="2"
-                        >
+                        android:weightSum="2">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Scan"
@@ -296,11 +284,11 @@
 
 
                             android:background="@color/colorAccent"
+                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
                             android:paddingEnd="34dp"
                             android:paddingBottom="3dp"
-                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
 
                             android:text="@string/connect"
                             android:textAlignment="center"
@@ -314,9 +302,9 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_print_black_24dp"
-
                             android:background="@color/colorAccent"
+
+                            android:drawableStart="@drawable/ic_print_black_24dp"
 
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
@@ -340,8 +328,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
 
-                    android:background="#F0F4FE"
-                    >
+                    android:background="#F0F4FE">
 
 
                     <TextView
@@ -378,8 +365,8 @@
                     android:id="@+id/llMonthly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
 
                     <TableLayout
@@ -395,8 +382,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:text="Date"
-                                android:gravity="center"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -404,8 +391,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:text="Bill No "
-                                android:gravity="center"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -414,28 +401,24 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:text="Name"
-                                android:gravity="center"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
-
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Total"
                                 android:gravity="center"
+                                android:text="Total"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                         </TableRow>
-
-
-
 
 
                     </TableLayout>
@@ -444,8 +427,9 @@
                         android:id="@+id/monthelyreport"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:orientation="vertical" />
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -458,23 +442,16 @@
                             android:id="@+id/createpdfmonth"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:layout_weight="1"
                             android:layout_margin="10dp"
-                            android:textAllCaps="false"
+                            android:layout_weight="1"
                             android:backgroundTint="#393185"
                             android:text="Create Pdf File"
+                            android:textAllCaps="false"
 
                             >
 
 
                         </Button>
-
-
-
-
-
-
-
 
 
                     </LinearLayout>
@@ -525,12 +502,12 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/linearlayout"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:weightSum="2"
-                        >
+                        android:weightSum="2">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Scan2"
@@ -541,26 +518,27 @@
 
 
                             android:background="@color/colorAccent"
+                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
                             android:paddingEnd="34dp"
                             android:paddingBottom="3dp"
-                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
 
                             android:text="@string/connect"
                             android:textAlignment="center"
                             android:textAllCaps="false"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold" />
+
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/mPrint1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_print_black_24dp"
-
                             android:background="@color/colorAccent"
+
+                            android:drawableStart="@drawable/ic_print_black_24dp"
 
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
@@ -577,14 +555,12 @@
                 </LinearLayout>
 
 
-
                 <RelativeLayout
+                    android:id="@+id/ivCustomer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:id="@+id/ivCustomer"
-                    android:background="#F0F4FE"
-                    >
+                    android:background="#F0F4FE">
 
 
                     <TextView
@@ -622,8 +598,8 @@
                     android:id="@+id/llcustomer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
                     <TableLayout
@@ -636,24 +612,12 @@
                             android:padding="5dp">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:text="Customer Id"
-                                android:gravity="center"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -661,8 +625,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:text="Bill No "
-                                android:gravity="center"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -671,28 +635,24 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:text="Customer Name"
-                                android:gravity="center"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
-
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Total"
                                 android:gravity="center"
+                                android:text="Total"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                         </TableRow>
-
-
-
 
 
                     </TableLayout>
@@ -716,24 +676,17 @@
                             android:id="@+id/createpdfcustomer"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_margin="10dp"
                             android:layout_gravity="center"
-                            android:textAllCaps="false"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
                             android:backgroundTint="#393185"
                             android:text="Create Pdf File"
+                            android:textAllCaps="false"
 
                             >
 
 
                         </Button>
-
-
-
-
-
-
-
 
 
                     </LinearLayout>
@@ -784,12 +737,12 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/linearlayout2"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:weightSum="2"
-                        >
+                        android:weightSum="2">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Scan3"
@@ -800,26 +753,27 @@
 
 
                             android:background="@color/colorAccent"
+                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
                             android:paddingEnd="34dp"
                             android:paddingBottom="3dp"
-                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
 
                             android:text="@string/connect"
                             android:textAlignment="center"
                             android:textAllCaps="false"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold" />
+
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/mPrint2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_print_black_24dp"
-
                             android:background="@color/colorAccent"
+
+                            android:drawableStart="@drawable/ic_print_black_24dp"
 
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
@@ -836,14 +790,12 @@
                 </LinearLayout>
 
 
-
                 <RelativeLayout
+                    android:id="@+id/ivyestrday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:id="@+id/ivyestrday"
-                    android:background="#F0F4FE"
-                    >
+                    android:background="#F0F4FE">
 
 
                     <TextView
@@ -876,33 +828,30 @@
                 </RelativeLayout>
 
 
-
-
                 <LinearLayout
                     android:id="@+id/llyestrday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="start"
-                        android:layout_margin="10dp">
+                        android:layout_margin="10dp"
+                        android:gravity="start">
 
                         <TableRow
                             android:background="@color/white"
-                            android:padding="5dp"
-                            >
+                            android:padding="5dp">
 
                             <TextView
                                 android:id="@+id/billno1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Bill No"
                                 android:gravity="center"
+                                android:text="Bill No"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -912,8 +861,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Code"
                                 android:gravity="center"
+                                android:text="Code"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -923,12 +872,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Name"
                                 android:gravity="center"
+                                android:text="Name"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
-
 
 
                             <TextView
@@ -936,16 +884,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Total"
                                 android:gravity="center"
+                                android:text="Total"
 
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                         </TableRow>
-
-
-
 
 
                     </TableLayout>
@@ -955,9 +900,9 @@
                         android:id="@+id/yestrdayrecordRecycleview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/dailyreport"
-                        android:orientation="vertical" />
+                        tools:listitem="@layout/dailyreport" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -971,11 +916,11 @@
                             android:id="@+id/createpdfyestrday"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:layout_weight="1"
                             android:layout_margin="10dp"
-                            android:textAllCaps="false"
+                            android:layout_weight="1"
                             android:backgroundTint="#393185"
                             android:text="Create Pdf File"
+                            android:textAllCaps="false"
 
                             >
 
@@ -983,20 +928,7 @@
                         </Button>
 
 
-
-
-
-
-
-
-
                     </LinearLayout>
-
-
-
-
-
-
 
 
                     <LinearLayout
@@ -1044,12 +976,12 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/linar"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:weightSum="2"
-                        >
+                        android:weightSum="2">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Scan12"
@@ -1060,11 +992,11 @@
 
 
                             android:background="@color/colorAccent"
+                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
                             android:paddingEnd="34dp"
                             android:paddingBottom="3dp"
-                            android:drawableStart="@drawable/ic_bluetooth_black_24dp"
 
                             android:text="@string/connect"
                             android:textAlignment="center"
@@ -1078,9 +1010,9 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_print_black_24dp"
-
                             android:background="@color/colorAccent"
+
+                            android:drawableStart="@drawable/ic_print_black_24dp"
 
                             android:paddingStart="10dp"
                             android:paddingTop="3dp"
@@ -1096,13 +1028,6 @@
 
 
                 </LinearLayout>
-
-
-
-
-
-
-
 
 
                 <TextView
@@ -1127,20 +1052,20 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_margin="10dp"
-                        android:backgroundTint="@color/white"
-                        android:layout_weight="1.7">
+                        android:layout_weight="1.7"
+                        android:backgroundTint="@color/white">
 
                         <AutoCompleteTextView
                             android:id="@+id/autoCompleteTextView1"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:textColorHint="@color/black"
                             android:layout_marginStart="5dp"
-                            android:hint="Enter Customer Id"
-
-                            android:textColor="@color/black"
                             android:background="@color/white"
-                            android:ems="10" />
+                            android:ems="10"
+
+                            android:hint="Enter Customer Id"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -1169,15 +1094,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_margin="10dp"
-                    android:backgroundTint="@color/white"
-                    android:layout_weight="1.6">
+                    android:layout_weight="1.6"
+                    android:backgroundTint="@color/white">
 
                     <EditText
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:background="@color/white"
                         android:layout_marginStart="10dp"
+                        android:background="@color/white"
                         android:text="Name :"
                         android:textColor="#575757"
                         android:textColorHint="@color/black">
@@ -1237,8 +1162,6 @@
                     </TableRow>
 
 
-
-
                 </TableLayout>
 
 
@@ -1250,5 +1173,4 @@
     </LinearLayout>
 
 
-
-    </LinearLayout>
+</LinearLayout>
