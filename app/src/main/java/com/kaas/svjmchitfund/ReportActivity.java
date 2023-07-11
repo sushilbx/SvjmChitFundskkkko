@@ -85,7 +85,7 @@ public class ReportActivity extends Activity implements Runnable {
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
 
-    TextView stat, bpstatus1, bpstatus2, bpstatus12,tvDaily;
+    TextView stat, bpstatus1, bpstatus2, bpstatus12, tvDaily;
     int printstat;
     byte FONT_TYPE;
     private static BluetoothSocket btsocket;
@@ -99,6 +99,7 @@ public class ReportActivity extends Activity implements Runnable {
     String group_id = "";
     String Month = "";
     String Amount = "";
+    RecyclerView rvCoustmer;
     ArrayAdapter<String> adapter;
     EditText name;
     TextView month, amount, total, ivDailyImage, code, billno;
@@ -121,6 +122,7 @@ public class ReportActivity extends Activity implements Runnable {
                 findViewById(R.id.autoCompleteTextView1);
         // recordRecycleview1 =findViewById(R.id.recordRecycleview1);
         recordRecycleview = findViewById(R.id.recordRecycleview);
+        rvCoustmer = findViewById(R.id.rvCoustmer);
         customerreport = findViewById(R.id.customerreport);
         yestrdayrecordRecycleview = findViewById(R.id.yestrdayrecordRecycleview);
         name = findViewById(R.id.name);
@@ -265,8 +267,6 @@ public class ReportActivity extends Activity implements Runnable {
 
                 for (int i = 0; i < customers.size(); i++) {
                     if (value.equalsIgnoreCase(customers.get(i).customers_id)) {
-
-
                         name.setText(Html.fromHtml(String.valueOf(customers.get(i).name)));
                         month.setText(Html.fromHtml(String.valueOf(customers.get(i).created_at)));
                         amount.setText(Html.fromHtml(String.valueOf(customers.get(i).installment)));
@@ -1357,7 +1357,7 @@ public class ReportActivity extends Activity implements Runnable {
 
                     recordRecycleview.setAdapter(dailyReportAdapter);
                     String total = String.valueOf(dailyReportAdapter.grandTotal());
-                    tvDaily.setText("Total Collection of the Day :     "+"₹ "+total);
+                    tvDaily.setText("Total Collection of the Day :     " + "₹ " + total);
 
 
                 }
@@ -1370,6 +1370,7 @@ public class ReportActivity extends Activity implements Runnable {
             }
         });
     }
+
     private void monthlyreport() {
         Log.e("sushiltoken", sessionModel.token);
         Call<MonthlyreportModel> call = RetrofitClient.getInstance().getApi().monthlyreport(String.format("Bearer %s", sessionModel.token));
@@ -1464,7 +1465,8 @@ public class ReportActivity extends Activity implements Runnable {
             public void onResponse(Call<CoustmerindexModel> call, Response<CoustmerindexModel> response) {
                 Log.d("sushil", "ok" + response.isSuccessful() + ", code: " + response.code());
                 if (response.isSuccessful()) {
-
+                    CoustmerReportAdapter coustmerReportAdapter = new CoustmerReportAdapter(response.body().customer, ReportActivity.this);
+                    rvCoustmer.setAdapter(coustmerReportAdapter);
 
                     customers.clear();
                     customers = (response.body().customer);
