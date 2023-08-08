@@ -22,6 +22,7 @@ import com.kaas.svjmchitfund.Module.MonthlyreportModel;
 import com.kaas.svjmchitfund.Module.SessionModel;
 import com.kaas.svjmchitfund.Module.SignupModel;
 import com.kaas.svjmchitfund.Module.TodayreportModel;
+import com.kaas.svjmchitfund.Module.TotalAmountModel;
 import com.kaas.svjmchitfund.Module.WeeklyReportModel;
 import com.kaas.svjmchitfund.Module.YestrdayreportModel;
 
@@ -243,6 +244,18 @@ public interface Api {
     Call<DateModel> dateReport(
             @Header("Authorization") String auth,
             @Field("created_at") String created_at
+    );
+    @FormUrlEncoded
+    @POST("month-wise-record")
+    Call<DateModel>monthReport(
+            @Header("Authorization") String auth,
+            @Field("created_at") String created_at
+    );
+    @FormUrlEncoded
+    @POST("amount-wise-record")
+    Call<TotalAmountModel>amountReport(
+            @Header("Authorization") String auth,
+            @Field("total_amount") String total_amount
     );
 
 

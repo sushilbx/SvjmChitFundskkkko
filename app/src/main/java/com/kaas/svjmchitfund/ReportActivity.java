@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kaas.svjmchitfund.Api.RetrofitClient;
+import com.kaas.svjmchitfund.Api.adapters.AmountAdapters;
 import com.kaas.svjmchitfund.Api.adapters.DateAdapters;
 import com.kaas.svjmchitfund.Module.CoustmerindexModel;
 import com.kaas.svjmchitfund.Module.CustomerreportModel;
@@ -48,6 +49,7 @@ import com.kaas.svjmchitfund.Module.DateModel;
 import com.kaas.svjmchitfund.Module.MonthlyreportModel;
 import com.kaas.svjmchitfund.Module.SessionModel;
 import com.kaas.svjmchitfund.Module.TodayreportModel;
+import com.kaas.svjmchitfund.Module.TotalAmountModel;
 import com.kaas.svjmchitfund.Module.YestrdayreportModel;
 import com.kaas.svjmchitfund.databinding.ActivityReportBinding;
 
@@ -79,6 +81,8 @@ public class ReportActivity extends Activity implements Runnable {
     protected static final String TAG = "ReportActivity";
     private static final int REQUEST_CONNECT_DEVICE = 1;
     String date;
+    String monthReport;
+    String amountTotal;
     ActivityReportBinding b;
     private static final int REQUEST_ENABLE_BT = 2;
     Button mScan, mPrint, Scan2, mPrint2, mPrint1, Scan3, mPrint12, Scan12, createpdf, createpdfmonth, createpdfcustomer, createpdfyestrday;
@@ -229,6 +233,23 @@ public class ReportActivity extends Activity implements Runnable {
                 dateWiseReport();
             }
         });
+        b.mbClickMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* if (checkForm()) {
+                    dateWiseReport();
+                }*/
+                monthWiseReport();
+            }
+        });
+        b.mbClickAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkForm()) {
+                    amountWiseReport();
+                }
+            }
+        });
         ivDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
                 if (b.llDateDetails.getVisibility() == View.VISIBLE) {
@@ -241,7 +262,30 @@ public class ReportActivity extends Activity implements Runnable {
 
             }
         });
+        b.ivMonth.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View mView) {
+                if (b.llMonthDetails.getVisibility() == View.VISIBLE) {
+                    b.llMonthDetails.setVisibility(View.GONE);
+                } else {
+                    b.llMonthDetails.setVisibility(View.VISIBLE);
 
+                }
+
+
+            }
+        });
+        b.ivAmount.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View mView) {
+                if (b.llAccountDetails.getVisibility() == View.VISIBLE) {
+                    b.llAccountDetails.setVisibility(View.GONE);
+                } else {
+                    b.llAccountDetails.setVisibility(View.VISIBLE);
+
+                }
+
+
+            }
+        });
 
         b.tvEnterDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,6 +299,25 @@ public class ReportActivity extends Activity implements Runnable {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         date = String.format("%s-%s-%s", year, String.format("%02d", month + 1), String.format("%02d", dayOfMonth));
                         b.tvEnterDate.setText(date);
+                    }
+                }, mYear, mMonth, mDay);
+//                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+                datePickerDialog.show();
+
+            }
+        });
+        b.tvEnterMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ReportActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        monthReport = String.format("%s-%s", year, String.format("%02d", month + 1)/*, String.format("%02d", dayOfMonth)*/);
+                        b.tvEnterMonth.setText(monthReport);
                     }
                 }, mYear, mMonth, mDay);
 //                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
@@ -943,6 +1006,71 @@ public class ReportActivity extends Activity implements Runnable {
         customerreport();
         Yestrdayreport();
 
+    }
+
+    private boolean checkForm() {
+        amountTotal = b.tvEnterAmount.getText().toString().trim();
+
+        if (amountTotal.isEmpty()) {
+            Toast.makeText(this, "Enter Amount", Toast.LENGTH_SHORT).show();
+            b.tvEnterAmount.setError("Amount is required");
+            return false;
+        }
+        return true;
+    }
+
+    private void amountWiseReport() {
+            Log.e("sushiltoken", sessionModel.token);
+            Call<TotalAmountModel> call = RetrofitClient.getInstance().getApi().amountReport("Bearer " + sessionModel.token, amountTotal);
+            call.enqueue(new Callback<TotalAmountModel>() {
+                @Override
+                public void onResponse(Call<TotalAmountModel> call, Response<TotalAmountModel> response) {
+                    Log.d("sushil", "ok" + response.message() + ", code: " + response.code());
+                    if (response.isSuccessful()) {
+                        if (response.body().data.size()==0){
+                            Toast.makeText(ReportActivity.this, "Dat Not Found", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            AmountAdapters amountAdapters = new AmountAdapters(response.body().data, ReportActivity.this);
+                            b.rvAmount.setAdapter(amountAdapters);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TotalAmountModel> call, Throwable t) {
+
+                    Toast.makeText(ReportActivity.this, "On Failure " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+    }
+
+    private void monthWiseReport() {
+        Log.e("sushiltoken", sessionModel.token);
+        Call<DateModel> call = RetrofitClient.getInstance().getApi().monthReport("Bearer " + sessionModel.token, monthReport);
+        call.enqueue(new Callback<DateModel>() {
+            @Override
+            public void onResponse(Call<DateModel> call, Response<DateModel> response) {
+                Log.d("sushil", "ok" + response.message() + ", code: " + response.code());
+                if (response.isSuccessful()) {
+                    if (response.body().data.size()==0){
+                        Toast.makeText(ReportActivity.this, "Dat Not Found", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        DateAdapters dateAdapters = new DateAdapters(response.body().data, ReportActivity.this);
+                        b.rvMonth.setAdapter(dateAdapters);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DateModel> call, Throwable t) {
+
+                Toast.makeText(ReportActivity.this, "On Failure " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void dateWiseReport() {
