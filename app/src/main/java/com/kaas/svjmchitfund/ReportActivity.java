@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -30,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,12 +41,15 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kaas.svjmchitfund.Api.RetrofitClient;
+import com.kaas.svjmchitfund.Api.adapters.DateAdapters;
 import com.kaas.svjmchitfund.Module.CoustmerindexModel;
 import com.kaas.svjmchitfund.Module.CustomerreportModel;
+import com.kaas.svjmchitfund.Module.DateModel;
 import com.kaas.svjmchitfund.Module.MonthlyreportModel;
 import com.kaas.svjmchitfund.Module.SessionModel;
 import com.kaas.svjmchitfund.Module.TodayreportModel;
 import com.kaas.svjmchitfund.Module.YestrdayreportModel;
+import com.kaas.svjmchitfund.databinding.ActivityReportBinding;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -73,6 +78,8 @@ public class ReportActivity extends Activity implements Runnable {
     private static final int PERMISSION_REQUEST_CODE = 200;
     protected static final String TAG = "ReportActivity";
     private static final int REQUEST_CONNECT_DEVICE = 1;
+    String date;
+    ActivityReportBinding b;
     private static final int REQUEST_ENABLE_BT = 2;
     Button mScan, mPrint, Scan2, mPrint2, mPrint1, Scan3, mPrint12, Scan12, createpdf, createpdfmonth, createpdfcustomer, createpdfyestrday;
     Calendar c = Calendar.getInstance();
@@ -90,7 +97,7 @@ public class ReportActivity extends Activity implements Runnable {
     byte FONT_TYPE;
     private static BluetoothSocket btsocket;
     private static OutputStream btoutputstream;
-    LinearLayout layout, ll_1;
+    LinearLayout layout, ll_1, llDe;
     RecyclerView recordRecycleview, monthelyreport, customerreport, yestrdayrecordRecycleview;
     SessionManager sessionManager;
     SessionModel sessionModel;
@@ -104,7 +111,7 @@ public class ReportActivity extends Activity implements Runnable {
     EditText name;
     TextView month, amount, total, ivDailyImage, code, billno;
     int id;
-    RelativeLayout ivDaily, ivMonthly, ivCustomer, ivyestrday;
+    RelativeLayout ivDaily, ivMonthly, ivCustomer, ivCustomer1, ivyestrday, ivDate;
     LinearLayout llDaily, llMonthly, llcustomer, llyestrday;
     Context context;
     ArrayList<String> customercode = new ArrayList<>();
@@ -115,19 +122,22 @@ public class ReportActivity extends Activity implements Runnable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report);
+        b = ActivityReportBinding.inflate(getLayoutInflater());
+        View view = b.getRoot();
+        setContentView(view);
         sessionManager = new SessionManager(ReportActivity.this);
         sessionModel = new Gson().fromJson(sessionManager.getLoginSession(), SessionModel.class);
         autocomplete = (AutoCompleteTextView)
                 findViewById(R.id.autoCompleteTextView1);
-        // recordRecycleview1 =findViewById(R.id.recordRecycleview1);
+        llDe = findViewById(R.id.llDetails);
         recordRecycleview = findViewById(R.id.recordRecycleview);
         rvCoustmer = findViewById(R.id.rvCoustmer);
         customerreport = findViewById(R.id.customerreport);
         yestrdayrecordRecycleview = findViewById(R.id.yestrdayrecordRecycleview);
         name = findViewById(R.id.name);
-
+        ivCustomer1 = findViewById(R.id.ivCustomer1);
         tvDaily = findViewById(R.id.tvDaily);
+        ivDate = findViewById(R.id.ivDate);
         createpdfmonth = findViewById(R.id.createpdfmonth);
         createpdfcustomer = findViewById(R.id.createpdfcustomer);
         createpdfyestrday = findViewById(R.id.createpdfyestrday);
@@ -210,6 +220,49 @@ public class ReportActivity extends Activity implements Runnable {
 
             }
         });
+        b.mbClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* if (checkForm()) {
+                    dateWiseReport();
+                }*/
+                dateWiseReport();
+            }
+        });
+        ivDate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View mView) {
+                if (b.llDateDetails.getVisibility() == View.VISIBLE) {
+                    b.llDateDetails.setVisibility(View.GONE);
+                } else {
+                    b.llDateDetails.setVisibility(View.VISIBLE);
+
+                }
+
+
+            }
+        });
+
+
+        b.tvEnterDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ReportActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        date = String.format("%s-%s-%s", year, String.format("%02d", month + 1), String.format("%02d", dayOfMonth));
+                        b.tvEnterDate.setText(date);
+                    }
+                }, mYear, mMonth, mDay);
+//                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+                datePickerDialog.show();
+
+            }
+        });
+
 
 
         ivDaily.setOnClickListener(new View.OnClickListener() {
@@ -892,6 +945,33 @@ public class ReportActivity extends Activity implements Runnable {
 
     }
 
+    private void dateWiseReport() {
+        Log.e("sushiltoken", sessionModel.token);
+        Call<DateModel> call = RetrofitClient.getInstance().getApi().dateReport("Bearer " + sessionModel.token, date);
+        call.enqueue(new Callback<DateModel>() {
+            @Override
+            public void onResponse(Call<DateModel> call, Response<DateModel> response) {
+                Log.d("sushil", "ok" + response.message() + ", code: " + response.code());
+                if (response.isSuccessful()) {
+                    if (response.body().data.size()==0){
+                        Toast.makeText(ReportActivity.this, "Dat Not Found", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        DateAdapters dateAdapters = new DateAdapters(response.body().data, ReportActivity.this);
+                        b.rvDate.setAdapter(dateAdapters);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DateModel> call, Throwable t) {
+
+                Toast.makeText(ReportActivity.this, "On Failure " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private boolean savePdfFile(Context context, List<TodayreportModel.Today> myPurchases) {
 
 
@@ -1465,8 +1545,26 @@ public class ReportActivity extends Activity implements Runnable {
             public void onResponse(Call<CoustmerindexModel> call, Response<CoustmerindexModel> response) {
                 Log.d("sushil", "ok" + response.isSuccessful() + ", code: " + response.code());
                 if (response.isSuccessful()) {
-                    CoustmerReportAdapter coustmerReportAdapter = new CoustmerReportAdapter(response.body().customer, ReportActivity.this);
-                    rvCoustmer.setAdapter(coustmerReportAdapter);
+                    ivCustomer1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //  llDe.setVisibility(View.VISIBLE);
+
+                            if (llDe.getVisibility() == View.VISIBLE) {
+                                llDe.setVisibility(View.GONE);
+                                rvCoustmer.setVisibility(View.GONE);
+                                // ivCustomer.setImageResource(R.mipmap.arrowup);
+                            } else {
+                                llDe.setVisibility(View.VISIBLE);
+                                rvCoustmer.setVisibility(View.VISIBLE);
+                                CoustmerReportAdapter coustmerReportAdapter = new CoustmerReportAdapter(response.body().customer, ReportActivity.this);
+                                rvCoustmer.setAdapter(coustmerReportAdapter);
+                            }
+                        }
+
+
+                    });
+
 
                     customers.clear();
                     customers = (response.body().customer);

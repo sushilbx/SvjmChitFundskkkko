@@ -9,6 +9,7 @@ import com.kaas.svjmchitfund.Module.BulkimageModel;
 import com.kaas.svjmchitfund.Module.ChangePasswordModel;
 import com.kaas.svjmchitfund.Module.CoustmerindexModel;
 import com.kaas.svjmchitfund.Module.CustomerreportModel;
+import com.kaas.svjmchitfund.Module.DateModel;
 import com.kaas.svjmchitfund.Module.EditCoustmerModel;
 import com.kaas.svjmchitfund.Module.EditbillnioModel;
 import com.kaas.svjmchitfund.Module.EditdateModel;
@@ -81,9 +82,6 @@ public interface Api {
     );
 
 
-
-
-
     @GET("group/index")
     Call<GrouplistModel> grouplist(
             @Header("Authorization") String auth
@@ -98,15 +96,11 @@ public interface Api {
     );
 
 
-
     @GET("customer/today/report")
     Call<TodayreportModel> customerreport(
             @Header("Authorization") String auth
 
     );
-
-
-
 
 
     @GET("customer/montly/report")
@@ -116,15 +110,13 @@ public interface Api {
     );
 
 
-
-
     @FormUrlEncoded
     @POST("customer/import")
     Call<BulkimageModel> customerimage(
             @Header("Authorization") String auth,
             @Field("customer_file") String customer_file
 
-            );
+    );
 
 
     @FormUrlEncoded
@@ -132,9 +124,9 @@ public interface Api {
     Call<BillModel> billing(
             @Header("Authorization") String auth,
             @Field("customers_id") String customers_id,
-              @Field("shop_name") String shop_name,
-              @Field("gst_no") String gst_no,
-              @Field("account_no") String account_no
+            @Field("shop_name") String shop_name,
+            @Field("gst_no") String gst_no,
+            @Field("account_no") String account_no
        /*     @Field("customers_id") String customers_id,
             @Field("name") String name,
             @Field("place") String place,
@@ -152,6 +144,7 @@ public interface Api {
             @Header("Authorization") String auth
 
     );
+
     @FormUrlEncoded
     @POST("changepassword")
     Call<ChangePasswordModel> changePassword(
@@ -167,14 +160,10 @@ public interface Api {
     );
 
 
-
-
-
     @GET("banner/index")
     Call<BannerModel> banners(
             @Header("Authorization") String auth
     );
-
 
 
     @GET("customer/reports")
@@ -189,21 +178,11 @@ public interface Api {
     );
 
 
-
-
-
-
-
-
-
-
-
     @Multipart
     @POST("customer/import")
     Call<MSGStatus> uploadDocuments(@Header("Authorization") String token,
                                     @Part ArrayList<MultipartBody.Part> url
-                                 );
-
+    );
 
 
     @FormUrlEncoded
@@ -244,7 +223,7 @@ public interface Api {
             @Field("billings_id") String billings_id,
             @Field("bill_no_password") String bill_no_password
 
-            );
+    );
 
 
     @FormUrlEncoded
@@ -259,8 +238,12 @@ public interface Api {
     );
 
 
-
-
+    @FormUrlEncoded
+    @POST("date-wise-record")
+    Call<DateModel> dateReport(
+            @Header("Authorization") String auth,
+            @Field("created_at") String created_at
+    );
 
 
 }

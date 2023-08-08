@@ -26,10 +26,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
-Button tvlogin,btn_signin;
-EditText etname,etPhone,etPassword,etemail,etConfirmpassword;
+    Button tvlogin, btn_signin;
+    EditText etname, etPhone, etPassword, etemail, etConfirmpassword;
     SessionManager sessionManager;
-    String name="",phone="",password="",Email="",Confirmpassword="";
+    String name = "", phone = "", password = "", Email = "", Confirmpassword = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +60,8 @@ EditText etname,etPhone,etPassword,etemail,etConfirmpassword;
                 if (checkForm()) {
                     signUp();
                 }
-                }
-
-
+            }
         });
-
-
-
-
 
 
     }
@@ -75,7 +69,7 @@ EditText etname,etPhone,etPassword,etemail,etConfirmpassword;
     void signUp() {
         sessionManager = new SessionManager(SignupActivity.this);
 
-        Call<SignupModel> call = RetrofitClient.getInstance().getApi().register(etname.getText().toString(),etPhone.getText().toString(),etPassword.getText().toString(),etemail.getText().toString(),etConfirmpassword.getText().toString());
+        Call<SignupModel> call = RetrofitClient.getInstance().getApi().register(etname.getText().toString(), etPhone.getText().toString(), etPassword.getText().toString(), etemail.getText().toString(), etConfirmpassword.getText().toString());
         call.enqueue(new Callback<SignupModel>() {
             @Override
             public void onResponse(Call<SignupModel> call, Response<SignupModel> response) {
@@ -158,6 +152,7 @@ EditText etname,etPhone,etPassword,etemail,etConfirmpassword;
 
         return true;
     }
+
     private void setError(ResponseBody error) throws JSONException, IOException {
         String errorBody = error.string();
 
