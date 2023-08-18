@@ -1,6 +1,4 @@
 package com.kaas.svjmchitfund.Api;
-
-
 import com.kaas.svjmchitfund.Module.AddCoustmerModel;
 import com.kaas.svjmchitfund.Module.BannerModel;
 import com.kaas.svjmchitfund.Module.BillModel;
@@ -10,7 +8,6 @@ import com.kaas.svjmchitfund.Module.ChangePasswordModel;
 import com.kaas.svjmchitfund.Module.CoustmerindexModel;
 import com.kaas.svjmchitfund.Module.CustomerreportModel;
 import com.kaas.svjmchitfund.Module.DateModel;
-import com.kaas.svjmchitfund.Module.EditCoustmerModel;
 import com.kaas.svjmchitfund.Module.EditbillnioModel;
 import com.kaas.svjmchitfund.Module.EditdateModel;
 import com.kaas.svjmchitfund.Module.GroupModel;
@@ -21,6 +18,7 @@ import com.kaas.svjmchitfund.Module.MSGStatus;
 import com.kaas.svjmchitfund.Module.MonthlyreportModel;
 import com.kaas.svjmchitfund.Module.SessionModel;
 import com.kaas.svjmchitfund.Module.SignupModel;
+import com.kaas.svjmchitfund.Module.StaffModel;
 import com.kaas.svjmchitfund.Module.TodayreportModel;
 import com.kaas.svjmchitfund.Module.TotalAmountModel;
 import com.kaas.svjmchitfund.Module.WeeklyReportModel;
@@ -29,7 +27,6 @@ import com.kaas.svjmchitfund.Module.YestrdayreportModel;
 import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -41,7 +38,6 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface Api {
-
 
     @FormUrlEncoded
     @POST("register")
@@ -128,7 +124,7 @@ public interface Api {
             @Field("shop_name") String shop_name,
             @Field("gst_no") String gst_no,
             @Field("account_no") String account_no
-       /*     @Field("customers_id") String customers_id,
+       /*   @Field("customers_id") String customers_id,
             @Field("name") String name,
             @Field("place") String place,
             @Field("month") String month,
@@ -136,7 +132,7 @@ public interface Api {
             @Field("billings_id") String billings_id,
             @Field("total") String total,
             @Field("bill_date_password") String bill_date_password,
-            @Field("amount") String amount*/
+            @Field("amount") String amount */
     );
 
 
@@ -163,6 +159,10 @@ public interface Api {
 
     @GET("banner/index")
     Call<BannerModel> banners(
+            @Header("Authorization") String auth
+    );
+    @GET("get/staf")
+    Call<StaffModel> staff(
             @Header("Authorization") String auth
     );
 
@@ -196,7 +196,9 @@ public interface Api {
             @Field("mobile") String mobile,
             @Field("place") String place,
             @Field("amount") String amount,
-            @Field("route") String route
+            @Field("route") String route,
+            @Field("staff_id") String staff_id
+
 
 
     );
@@ -245,19 +247,20 @@ public interface Api {
             @Header("Authorization") String auth,
             @Field("created_at") String created_at
     );
+
     @FormUrlEncoded
     @POST("month-wise-record")
-    Call<DateModel>monthReport(
+    Call<DateModel> monthReport(
             @Header("Authorization") String auth,
             @Field("created_at") String created_at
     );
+
     @FormUrlEncoded
     @POST("amount-wise-record")
-    Call<TotalAmountModel>amountReport(
+    Call<TotalAmountModel> amountReport(
             @Header("Authorization") String auth,
             @Field("total_amount") String total_amount
     );
-
 
 }
 

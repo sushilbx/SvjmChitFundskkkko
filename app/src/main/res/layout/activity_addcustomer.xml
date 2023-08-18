@@ -246,6 +246,24 @@
                 </EditText>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1.6"
+
+                android:backgroundTint="@color/white">
+
+                <Spinner
+                    android:id="@+id/sStaff"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+
+                    android:textColorHint="@color/black">
+
+                </Spinner>
+            </androidx.cardview.widget.CardView>
+
 
             <Button
                 android:id="@+id/btnadd"

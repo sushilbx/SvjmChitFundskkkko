@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ import com.kaas.svjmchitfund.Module.AddCoustmerModel;
 import com.kaas.svjmchitfund.Module.EditCoustmerModel;
 import com.kaas.svjmchitfund.Module.GrouplistModel;
 import com.kaas.svjmchitfund.Module.SessionModel;
+import com.kaas.svjmchitfund.Module.StaffModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,8 +52,8 @@ public class AddcustomerActivity extends AppCompatActivity {
     boolean customer = false;
     String group_id = "";
     String group_Amount = "";
-
-    int Enter_Amount;
+Spinner sStaff;
+    String staff_id;
     int Group_Amount;
 
     LinearLayout ll_1;
@@ -77,7 +79,7 @@ public class AddcustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_addcustomer);
         context = this;
         btnadd = findViewById(R.id.btnadd);
-        // back = findViewById(R.id.back);
+         sStaff = findViewById(R.id.sStaff);
         // etGroup = findViewById(R.id.etGroup);
         etCoustmerCode = findViewById(R.id.etCoustmerCode);
         etName = findViewById(R.id.etName);
@@ -101,7 +103,7 @@ public class AddcustomerActivity extends AppCompatActivity {
             }
         });
 
-
+        getStaff();
         grouplist();
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,10 +163,44 @@ public class AddcustomerActivity extends AppCompatActivity {
         });
 
     }
+    private void getStaff() {
+        Call<StaffModel> call = RetrofitClient.getInstance().getApi().staff("Bearer "+ sessionModel.token);
+        call.enqueue(new Callback<StaffModel>() {
+            @Override
+            public void onResponse(Call<StaffModel> call, Response<StaffModel> response) {
+                ArrayList<String> countryList = new ArrayList<>();
+                //countryList.add("Country");
+                for (StaffModel.Datum countryData : response.body().data) {
+                    countryList.add(countryData.name);
+                }
+                ArrayAdapter aa = new ArrayAdapter(AddcustomerActivity.this, android.R.layout.simple_spinner_item, countryList);
+                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                sStaff.setAdapter(aa);
+                sStaff.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        staff_id = String.valueOf(response.body().data.get(i).id);
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<StaffModel> call, Throwable t) {
+
+                Log.e("sushil", t.getMessage());
+                Toast.makeText(AddcustomerActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void addCoustmer() {
         Log.e("sushiltoken", sessionModel.token);
-        Call<AddCoustmerModel> call = RetrofitClient.getInstance().getApi().addCoustmer(String.format("Bearer %s", sessionModel.token), group_id, customers_id, name, mobile, place, installmentamt, route);
+        Call<AddCoustmerModel> call = RetrofitClient.getInstance().getApi().addCoustmer(String.format("Bearer %s", sessionModel.token), group_id, customers_id, name, mobile, place, installmentamt, route,"1");
         call.enqueue(new Callback<AddCoustmerModel>() {
             @Override
             public void onResponse(Call<AddCoustmerModel> call, Response<AddCoustmerModel> response) {
