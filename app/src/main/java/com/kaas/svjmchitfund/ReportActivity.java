@@ -3,9 +3,6 @@ package com.kaas.svjmchitfund;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
 
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -33,11 +30,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.kaas.svjmchitfund.Api.RetrofitClient;
@@ -197,6 +196,12 @@ public class ReportActivity extends Activity implements Runnable {
                 finish();
             }
         });
+        b.rlNextFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReportActivity.this, FilterActivity.class));
+            }
+        });
 
 
         // ReportAdapter adaptersblog = new ReportAdapter(ReportActivity.this);
@@ -325,7 +330,6 @@ public class ReportActivity extends Activity implements Runnable {
 
             }
         });
-
 
 
         ivDaily.setOnClickListener(new View.OnClickListener() {
@@ -1020,30 +1024,30 @@ public class ReportActivity extends Activity implements Runnable {
     }
 
     private void amountWiseReport() {
-            Log.e("sushiltoken", sessionModel.token);
-            Call<TotalAmountModel> call = RetrofitClient.getInstance().getApi().amountReport("Bearer " + sessionModel.token, amountTotal);
-            call.enqueue(new Callback<TotalAmountModel>() {
-                @Override
-                public void onResponse(Call<TotalAmountModel> call, Response<TotalAmountModel> response) {
-                    Log.d("sushil", "ok" + response.message() + ", code: " + response.code());
-                    if (response.isSuccessful()) {
-                        if (response.body().data.size()==0){
-                            Toast.makeText(ReportActivity.this, "Dat Not Found", Toast.LENGTH_SHORT).show();
+        Log.e("sushiltoken", sessionModel.token);
+        Call<TotalAmountModel> call = RetrofitClient.getInstance().getApi().amountReport("Bearer " + sessionModel.token, amountTotal);
+        call.enqueue(new Callback<TotalAmountModel>() {
+            @Override
+            public void onResponse(Call<TotalAmountModel> call, Response<TotalAmountModel> response) {
+                Log.d("sushil", "ok" + response.message() + ", code: " + response.code());
+                if (response.isSuccessful()) {
+                    if (response.body().data.size() == 0) {
+                        Toast.makeText(ReportActivity.this, "Dat Not Found", Toast.LENGTH_SHORT).show();
 
-                        }else {
-                            AmountAdapters amountAdapters = new AmountAdapters(response.body().data, ReportActivity.this);
-                            b.rvAmount.setAdapter(amountAdapters);
-                        }
-
+                    } else {
+                        AmountAdapters amountAdapters = new AmountAdapters(response.body().data, ReportActivity.this);
+                        b.rvAmount.setAdapter(amountAdapters);
                     }
-                }
 
-                @Override
-                public void onFailure(Call<TotalAmountModel> call, Throwable t) {
-
-                    Toast.makeText(ReportActivity.this, "On Failure " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+
+            @Override
+            public void onFailure(Call<TotalAmountModel> call, Throwable t) {
+
+                Toast.makeText(ReportActivity.this, "On Failure " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void monthWiseReport() {
@@ -1054,10 +1058,10 @@ public class ReportActivity extends Activity implements Runnable {
             public void onResponse(Call<DateModel> call, Response<DateModel> response) {
                 Log.d("sushil", "ok" + response.message() + ", code: " + response.code());
                 if (response.isSuccessful()) {
-                    if (response.body().data.size()==0){
+                    if (response.body().data.size() == 0) {
                         Toast.makeText(ReportActivity.this, "Dat Not Found", Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    } else {
                         DateAdapters dateAdapters = new DateAdapters(response.body().data, ReportActivity.this);
                         b.rvMonth.setAdapter(dateAdapters);
                     }
@@ -1081,10 +1085,10 @@ public class ReportActivity extends Activity implements Runnable {
             public void onResponse(Call<DateModel> call, Response<DateModel> response) {
                 Log.d("sushil", "ok" + response.message() + ", code: " + response.code());
                 if (response.isSuccessful()) {
-                    if (response.body().data.size()==0){
+                    if (response.body().data.size() == 0) {
                         Toast.makeText(ReportActivity.this, "Dat Not Found", Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    } else {
                         DateAdapters dateAdapters = new DateAdapters(response.body().data, ReportActivity.this);
                         b.rvDate.setAdapter(dateAdapters);
                     }

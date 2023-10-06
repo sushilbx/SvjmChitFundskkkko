@@ -1599,7 +1599,6 @@
 
 
                 </RelativeLayout>
-
                 <LinearLayout
                     android:id="@+id/llAccountDetails"
                     android:layout_width="match_parent"
@@ -1661,6 +1660,43 @@
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                 </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/rlNextFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="#F0F4FE">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Custom Report"
+                        android:textColor="#393185"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+
+                    <ImageView
+
+                        android:layout_width="16dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/arrowdown">
+
+                    </ImageView>
+
+
+                </RelativeLayout>
 
 
             </LinearLayout>

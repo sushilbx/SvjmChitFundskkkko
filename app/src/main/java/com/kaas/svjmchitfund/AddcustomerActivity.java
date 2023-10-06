@@ -1,9 +1,6 @@
 package com.kaas.svjmchitfund;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -19,10 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.kaas.svjmchitfund.Api.RetrofitClient;
 import com.kaas.svjmchitfund.Module.AddCoustmerModel;
-import com.kaas.svjmchitfund.Module.EditCoustmerModel;
 import com.kaas.svjmchitfund.Module.GrouplistModel;
 import com.kaas.svjmchitfund.Module.SessionModel;
 import com.kaas.svjmchitfund.Module.StaffModel;
@@ -32,7 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -52,7 +49,7 @@ public class AddcustomerActivity extends AppCompatActivity {
     boolean customer = false;
     String group_id = "";
     String group_Amount = "";
-Spinner sStaff;
+    Spinner sStaff;
     String staff_id;
     int Group_Amount;
 
@@ -79,7 +76,7 @@ Spinner sStaff;
         setContentView(R.layout.activity_addcustomer);
         context = this;
         btnadd = findViewById(R.id.btnadd);
-         sStaff = findViewById(R.id.sStaff);
+        sStaff = findViewById(R.id.sStaff);
         // etGroup = findViewById(R.id.etGroup);
         etCoustmerCode = findViewById(R.id.etCoustmerCode);
         etName = findViewById(R.id.etName);
@@ -95,7 +92,7 @@ Spinner sStaff;
         sessionManager = new SessionManager(AddcustomerActivity.this);
         sessionModel = new Gson().fromJson(sessionManager.getLoginSession(), SessionModel.class);
 
-
+        Log.e("okkkktoken", sessionModel.token);
         ll_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,8 +160,9 @@ Spinner sStaff;
         });
 
     }
+
     private void getStaff() {
-        Call<StaffModel> call = RetrofitClient.getInstance().getApi().staff("Bearer "+ sessionModel.token);
+        Call<StaffModel> call = RetrofitClient.getInstance().getApi().staff("Bearer " + sessionModel.token);
         call.enqueue(new Callback<StaffModel>() {
             @Override
             public void onResponse(Call<StaffModel> call, Response<StaffModel> response) {
@@ -200,7 +198,7 @@ Spinner sStaff;
 
     private void addCoustmer() {
         Log.e("sushiltoken", sessionModel.token);
-        Call<AddCoustmerModel> call = RetrofitClient.getInstance().getApi().addCoustmer(String.format("Bearer %s", sessionModel.token), group_id, customers_id, name, mobile, place, installmentamt, route,"1");
+        Call<AddCoustmerModel> call = RetrofitClient.getInstance().getApi().addCoustmer(String.format("Bearer %s", sessionModel.token), group_id, customers_id, name, mobile, place, installmentamt, route, "1");
         call.enqueue(new Callback<AddCoustmerModel>() {
             @Override
             public void onResponse(Call<AddCoustmerModel> call, Response<AddCoustmerModel> response) {
