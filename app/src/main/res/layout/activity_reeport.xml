@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".FilterActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,6 +127,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <Button
+            android:id="@+id/printTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Print"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"/>
 
 
 

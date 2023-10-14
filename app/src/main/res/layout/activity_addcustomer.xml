@@ -67,7 +67,6 @@
                     android:background="@color/white"
                     android:ems="10"
                     android:hint="Enter Group Id"
-
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </androidx.cardview.widget.CardView>

@@ -1,4 +1,5 @@
 package com.kaas.svjmchitfund.Api;
+
 import com.kaas.svjmchitfund.Module.AddCoustmerModel;
 import com.kaas.svjmchitfund.Module.BannerModel;
 import com.kaas.svjmchitfund.Module.BillModel;
@@ -6,6 +7,7 @@ import com.kaas.svjmchitfund.Module.BilllistModel;
 import com.kaas.svjmchitfund.Module.BulkimageModel;
 import com.kaas.svjmchitfund.Module.ChangePasswordModel;
 import com.kaas.svjmchitfund.Module.CoustmerindexModel;
+import com.kaas.svjmchitfund.Module.CreateBillModel;
 import com.kaas.svjmchitfund.Module.CustomerreportModel;
 import com.kaas.svjmchitfund.Module.DateModel;
 import com.kaas.svjmchitfund.Module.EditbillnioModel;
@@ -123,7 +125,8 @@ public interface Api {
             @Field("customers_id") String customers_id,
             @Field("shop_name") String shop_name,
             @Field("gst_no") String gst_no,
-            @Field("account_no") String account_no
+            @Field("account_no") String account_no,
+            @Field("staff_id") String staff_id
        /*   @Field("customers_id") String customers_id,
             @Field("name") String name,
             @Field("place") String place,
@@ -135,6 +138,21 @@ public interface Api {
             @Field("amount") String amount */
     );
 
+    @FormUrlEncoded
+    @POST("add/user/bill")
+    Call<CreateBillModel> createBill(
+            @Header("Authorization") String auth,
+            @Field("group_id") String group_id,
+            @Field("customers_id") String customer_id,
+            @Field("mobile") String mobile,
+            @Field("staff_id") String staff_id,
+            @Field("place") String place,
+            @Field("installment") String installment,
+            @Field("route") String route,
+            @Field("total_amount") String total_amount,
+            @Field("name") String name
+
+    );
 
     @GET("billing/index")
     Call<BilllistModel> billingindex(
@@ -161,6 +179,7 @@ public interface Api {
     Call<BannerModel> banners(
             @Header("Authorization") String auth
     );
+
     @GET("get/staf")
     Call<StaffModel> staff(
             @Header("Authorization") String auth
@@ -198,7 +217,6 @@ public interface Api {
             @Field("amount") String amount,
             @Field("route") String route,
             @Field("staff_id") String staff_id
-
 
 
     );
